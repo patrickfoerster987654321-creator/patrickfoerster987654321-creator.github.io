@@ -2,36 +2,108 @@
 <html lang = "en">
 	<head>
 		<title>Terminal commands</title>
-		<style>
-			body{
-				background-color:black;
-				color:white;
-			}
 
 	</head>
 	<body>
-		<h1>Terminal commands</h1>
-		<h2>Commands for first reading quiz</h2>
+		<h1>Terminal tutorial</h1>
+		<h2>Vocabulary</h2>
+		<dl>
+			<dt>Command line</dt>
+				<dd>A special place in your computer where you can alter the computer and how it functions.</dd>
+			<dt>Command</dt>
+				<dd>A command is a special set of instructions that the computer runs once called.</dd>
+			<dt>Argument</dt>
+				<dd>An argument is a part of a command that gives the command special instructions to do something besides its default.
+			<dt>Flag</dt>
+				<dd>A special type of argument that alters how the command is run. Flags are signaled with a dash.</dd>
+		</dl>
+		<h2>Terminal commands</h2>
 		<ul>
 			<li><strong>ls</strong>
-				<ul>
+			<ul>
 				<li>Lists the contents of the directory. If no directory is specified, lists the contents of the current working directory.</li>
-				<li>How to use: <strong>ls $DIR</strong>. $DIR is the directory. Use the -l flag to get more information like <strong>ls $DIR -l</strong>.</li>
-				</ul>
+				<li>How to use: <code>ls $DIR</code>. $DIR is the directory. Use the -l flag to get more information like <code>ls $DIR -l</code>.</li>
+			</ul>
 			</li>
 			<li><strong>cd</strong>
-				<ul>
+			<ul>
 				<li>Changes the current working directory to the directory you choose. In effect, moves you around the computer.</li>
-				<li>How to use: <strong>cd $DIR</strong>. $DIR is the directory you want to change to. Use the .. argument to go back like <strong>cd ..</strong>.</li>
-				</ul>
+				<li>How to use: <code>cd $DIR</code>. $DIR is the directory you want to change to. Use the .. argument to go back like <code>cd ..</code>.Use <code>cd</code> to go to your home directory.</li>
+			</ul>
 			</li>
 			<li><strong>pwd</strong>
-				<ul>
+			<ul>
 				<li>This command shows were you are in the computer all the way up to the top</li>
-				<li>How to use:<strong>pwd</strong>.</li>
-				</ul>
+				<li>How to use: <code>pwd</code>.</li>
+			</ul>
 			</li>
-		<h2>Commands for the second reading quiz</h2>
-			<p>Credit to <cite> https://www.davidbaumgold.com/tutorials/command-lineM/</cite></p>
+			<li><strong>mkdir</strong>
+			<ul>
+				<li>Makes a new directory in your current working directory</li>
+				<li>How to use: <code>mkdir $DIR</code>. $DIR is the name of the directory.</li>
+			</ul>
+			</li>
+			<li><strong>rm and rmdir</strong>
+			<ul>
+				<li>Removes a file or directory. Be careful when using this command because there is no way to get the file back.</li>
+				<li>How to use: <code>rm $FILE</code>, <code>rmdir $DIR</code>. $FILE is the file you want to delete, and $DIR is the directory you want to delete.</li>
+			</ul>
+			</li>
+			<li><strong>cp</strong>
+			<ul>
+				<li>Copies a file and moves it to a different directory</li>
+				<li>How to use: <code>cp $FILE $LOCATION</code>. $FILE is the file you want to copy, and $LOCATION is where you want to move the file.</li>
+			</ul>
+			</li>
+			<li><strong>mv</strong>
+			<ul>
+					<li>Moves a file to a different directory.</li>
+					<li>How to use: <code>mv $FILE $LOCATION</code>. $FILE is the file you want to move, and $LOCATION is where you want to move the file.</li>
+			</ul>
+			</li>
+			<li><strong>grep</strong>
+			<ul>
+				<li>Searches for specific text in a file</li>
+				<li>How to use: <code>grep "txt" $FILE</code>. Txt is the specific text that you want to search for in a file, and $FILE is the file you want to search for that text.</li>
+			</ul>
+			</li>
+			<li><strong>less</strong>
+			<ul>
+				<li>Displays the contents of a file</li>
+				<li>How to use <code>less $FILE</code>. $FILE is the file you want to see. Use the up and down arrows to look through the file and use q to quit.</li>
+			</ul>
+			</li>
+			<li><strong>man</strong>
+			<ul>
+				<li>Gives you all of the information on how to use a command.</li>
+				<li>How to use: <code>man $UTIL</code>. $UTIL is the command you want to get information about. Scroll through the manual with the up and down arrows and use q to quit.</li>
+			</ul>
+			</li>
+			<li><strong>touch</strong>
+			<ul>
+				<li>A command that creates a file</li>
+				<li>How to use: <code>touch $FILE</code>. $FILE is the name of the file that you want.</li>
+			</ul>
+			</li>
+			<li><strong>exit</strong>
+			<ul>
+				<li>A commands that exits the terminal</li>
+				<li>How to use: <code>exit</code></li>
+			</ul>
+			</li>
+			<li><strong>open</strong>
+			<ul>
+				<li>Opens a file or a directory on Finder or a different application</li>
+				<li>How to use: open $FILE, open $DIR. $FILE is the file you want to open, and this file will open in the default app that opens their document type. $DIR is the directory you want to open, and it will open in the Finder app.</li>
+			</ul>
+			</li>	
+			<li><strong>sudo</strong>
+			<ul>
+				<li>A very powerful command that lets you run commands with super user privileges.</li>
+				<li>How to use: <code>sudo $CMD</code>. $CMD is the command you want to run with its arguments. When using sudo, the computer will ask you for a password, which is so secure that it doesn't show any characters at all, just a key icon. Sudo is prohibited by APS.</li>
+			</ul>
+			</li>
+		</ul>
+		<p>Credit to <cite> https://www.davidbaumgold.com/tu    torials/command-lineM/</cite></p>
 	</body>
 </html>
