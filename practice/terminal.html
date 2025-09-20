@@ -1,109 +1,110 @@
 <!DOCTYPE html>
-<html lang = "en">
-	<head>
-		<title>Terminal commands</title>
+<html>
+  <head>
+    <title>Terminal tutorial</title>
+  </head>
+  <body>
+    <h1>Terminal tutorial</h1>
+    <h2>Vocabulary</h2>
+    <dl>
+        <dt>Command line</dt>
+	<dd>A powerful tool that lets you change basically anything in your computer</dd>
+	<dt>Command</dt>
+	<dd>A special phrase that when used, tells the computer exactly what to do</dd>
+	<dt>Argument</dt>
+	<dd>A phrase added to a command that alters how the command is run</dd>
+    <h2>Terminal commands</h2>
+    <ul>
+      <li>
+        <strong>ls</strong><br>
+        Lists the contents of the directory.  
+        <pre><code>ls $DIR</code></pre>
+        <p><samp>$DIR</samp> is the directory. Use the <kbd>-l</kbd> flag to get more information like:</p>
+        <pre><code>ls $DIR -l</code></pre>
+      </li>
 
-	</head>
-	<body>
-		<h1>Terminal tutorial</h1>
-		<h2>Vocabulary</h2>
-		<dl>
-			<dt>Command line</dt>
-				<dd>A special place in your computer where you can alter the computer and how it functions.</dd>
-			<dt>Command</dt>
-				<dd>A command is a special set of instructions that the computer runs once called.</dd>
-			<dt>Argument</dt>
-				<dd>An argument is a part of a command that gives the command special instructions to do something besides its default.
-			<dt>Flag</dt>
-				<dd>A special type of argument that alters how the command is run. Flags are signaled with a dash.</dd>
-		</dl>
-		<h2>Terminal commands</h2>
-		<ul>
-			<li><strong>ls</strong>
-			<ul>
-				<li>Lists the contents of the directory. If no directory is specified, lists the contents of the current working directory.</li>
-				<li>How to use: <code>ls $DIR</code>. $DIR is the directory. Use the -l flag to get more information like <code>ls $DIR -l</code>.</li>
-			</ul>
-			</li>
-			<li><strong>cd</strong>
-			<ul>
-				<li>Changes the current working directory to the directory you choose. In effect, moves you around the computer.</li>
-				<li>How to use: <code>cd $DIR</code>. $DIR is the directory you want to change to. Use the .. argument to go back like <code>cd ..</code>.Use <code>cd</code> to go to your home directory.</li>
-			</ul>
-			</li>
-			<li><strong>pwd</strong>
-			<ul>
-				<li>This command shows were you are in the computer all the way up to the top</li>
-				<li>How to use: <code>pwd</code>.</li>
-			</ul>
-			</li>
-			<li><strong>mkdir</strong>
-			<ul>
-				<li>Makes a new directory in your current working directory</li>
-				<li>How to use: <code>mkdir $DIR</code>. $DIR is the name of the directory.</li>
-			</ul>
-			</li>
-			<li><strong>rm and rmdir</strong>
-			<ul>
-				<li>Removes a file or directory. Be careful when using this command because there is no way to get the file back.</li>
-				<li>How to use: <code>rm $FILE</code>, <code>rmdir $DIR</code>. $FILE is the file you want to delete, and $DIR is the directory you want to delete.</li>
-			</ul>
-			</li>
-			<li><strong>cp</strong>
-			<ul>
-				<li>Copies a file and moves it to a different directory</li>
-				<li>How to use: <code>cp $FILE $LOCATION</code>. $FILE is the file you want to copy, and $LOCATION is where you want to move the file.</li>
-			</ul>
-			</li>
-			<li><strong>mv</strong>
-			<ul>
-					<li>Moves a file to a different directory.</li>
-					<li>How to use: <code>mv $FILE $LOCATION</code>. $FILE is the file you want to move, and $LOCATION is where you want to move the file.</li>
-			</ul>
-			</li>
-			<li><strong>grep</strong>
-			<ul>
-				<li>Searches for specific text in a file</li>
-				<li>How to use: <code>grep "txt" $FILE</code>. Txt is the specific text that you want to search for in a file, and $FILE is the file you want to search for that text.</li>
-			</ul>
-			</li>
-			<li><strong>less</strong>
-			<ul>
-				<li>Displays the contents of a file</li>
-				<li>How to use <code>less $FILE</code>. $FILE is the file you want to see. Use the up and down arrows to look through the file and use q to quit.</li>
-			</ul>
-			</li>
-			<li><strong>man</strong>
-			<ul>
-				<li>Gives you all of the information on how to use a command.</li>
-				<li>How to use: <code>man $UTIL</code>. $UTIL is the command you want to get information about. Scroll through the manual with the up and down arrows and use q to quit.</li>
-			</ul>
-			</li>
-			<li><strong>touch</strong>
-			<ul>
-				<li>A command that creates a file</li>
-				<li>How to use: <code>touch $FILE</code>. $FILE is the name of the file that you want.</li>
-			</ul>
-			</li>
-			<li><strong>exit</strong>
-			<ul>
-				<li>A commands that exits the terminal</li>
-				<li>How to use: <code>exit</code></li>
-			</ul>
-			</li>
-			<li><strong>open</strong>
-			<ul>
-				<li>Opens a file or a directory on Finder or a different application</li>
-				<li>How to use: open $FILE, open $DIR. $FILE is the file you want to open, and this file will open in the default app that opens their document type. $DIR is the directory you want to open, and it will open in the Finder app.</li>
-			</ul>
-			</li>	
-			<li><strong>sudo</strong>
-			<ul>
-				<li>A very powerful command that lets you run commands with super user privileges.</li>
-				<li>How to use: <code>sudo $CMD</code>. $CMD is the command you want to run with its arguments. When using sudo, the computer will ask you for a password, which is so secure that it doesn't show any characters at all, just a key icon. Sudo is prohibited by APS.</li>
-			</ul>
-			</li>
-		</ul>
-		<p>Credit to <cite> https://www.davidbaumgold.com/tu    torials/command-lineM/</cite></p>
-	</body>
+      <li>
+        <strong>cd</strong><br>
+        Changes the current working directory.  
+        <ol>
+          <li>Type <kbd>cd</kbd> followed by the directory name.</li>
+          <li>Use <kbd>cd ..</kbd> to go back one level.</li>
+          <li>Use <kbd>cd</kbd> alone to return to your home directory.</li>
+        </ol>
+        <pre><code>cd $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>pwd</strong><br>
+        Shows where you are in the computer.  
+        <pre><code>pwd</code></pre>
+        <p>Example output: <samp>/Users/student/projects</samp></p>
+      </li>
+
+      <li>
+        <strong>mkdir</strong><br>
+        Makes a new directory.  
+        <pre><code>mkdir $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>rm / rmdir</strong><br>
+        Removes a file or directory.  
+        <pre><code>rm $FILE</code></pre>
+        <pre><code>rmdir $DIR</code></pre>
+        <p><samp>$FILE</samp> is the file you want to delete, and <samp>$DIR</samp> is the directory you want to delete.</p>
+      </li>
+
+      <li>
+        <strong>grep</strong><br>
+        Searches for text in a file.  
+        <pre><code>grep "txt" $FILE</code></pre>
+        <p>Example output: <samp>Found "txt" on line 42</samp></p>
+      </li>
+
+      <li>
+        <strong>less</strong><br>
+        Displays the contents of a file.  
+        <pre><code>less $FILE</code></pre>
+        <p>Navigate with <kbd>↑</kbd> and <kbd>↓</kbd>, quit with <kbd>q</kbd>.</p>
+      </li>
+
+      <li>
+        <strong>man</strong><br>
+        Shows the manual for a command.  
+        <pre><code>man $UTIL</code></pre>
+        <p>Scroll with <kbd>↑</kbd>/<kbd>↓</kbd>, quit with <kbd>q</kbd>.</p>
+      </li>
+
+      <li>
+        <strong>touch</strong><br>
+        Creates a file.  
+        <pre><code>touch $FILE</code></pre>
+      </li>
+
+      <li>
+        <strong>exit</strong><br>
+        Exits the terminal.  
+        <pre><code>exit</code></pre>
+      </li>
+
+      <li>
+        <strong>open</strong><br>
+        Opens a file or directory.  
+        <pre><code>open $FILE</code></pre>
+        <pre><code>open $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>sudo</strong><br>
+        Runs a command with superuser privileges.  
+        <pre><code>sudo $CMD</code></pre>
+        <p>When prompted, type your password (it will not display as you type).</p>
+	<p>The sudo command for your account is prohibited by APS.</p>
+      </li>
+    </ul>
+
+    <p>Credit to <cite>"https://www.davidbaumgold.com/tutorials/command-line/"</cite></p>
+  </body>
 </html>
+
