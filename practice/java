@@ -1,5 +1,11 @@
 class myClass{
 	public static void main(String[] args){
-		System.out.print("Hi");
+		m("Hi");
+	}
+}
+
+class java{
+	public String m(String word){
+		System.out.println(word);
 	}
 }
