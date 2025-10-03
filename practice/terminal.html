@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Terminal tutorial</title>
+  </head>
+  <body>
+    <h1>Terminal tutorial</h1>
+    <h2>Vocabulary</h2>
+    <dl>
+        <dt>Command line</dt>
+	<dd>A powerful tool that lets you change basically anything in your computer</dd>
+	<dt>Command</dt>
+	<dd>A special phrase that when used, tells the computer exactly what to do</dd>
+	<dt>Argument</dt>
+	<dd>A phrase added to a command that alters how the command is run</dd>
+    <h2>Terminal commands</h2>
+    <ul>
+      <li>
+        <strong>ls</strong><br>
+        Lists the contents of the directory.  
+        <pre><code>ls $DIR</code></pre>
+        <p><samp>$DIR</samp> is the directory. Use the <kbd>-l</kbd> flag to get more information like:</p>
+        <pre><code>ls $DIR -l</code></pre>
+      </li>
+
+      <li>
+        <strong>cd</strong><br>
+        Changes the current working directory.  
+        <ol>
+          <li>Type <kbd>cd</kbd> followed by the directory name.</li>
+          <li>Use <kbd>cd ..</kbd> to go back one level.</li>
+          <li>Use <kbd>cd</kbd> alone to return to your home directory.</li>
+        </ol>
+        <pre><code>cd $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>pwd</strong><br>
+        Shows where you are in the computer.  
+        <pre><code>pwd</code></pre>
+        <p>Example output: <samp>/Users/student/projects</samp></p>
+      </li>
+
+      <li>
+        <strong>mkdir</strong><br>
+        Makes a new directory.  
+        <pre><code>mkdir $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>rm / rmdir</strong><br>
+        Removes a file or directory.  
+        <pre><code>rm $FILE</code></pre>
+        <pre><code>rmdir $DIR</code></pre>
+        <p><samp>$FILE</samp> is the file you want to delete, and <samp>$DIR</samp> is the directory you want to delete.</p>
+      </li>
+
+      <li>
+        <strong>grep</strong><br>
+        Searches for text in a file.  
+        <pre><code>grep "txt" $FILE</code></pre>
+        <p>Example output: <samp>Found "txt" on line 42</samp></p>
+      </li>
+
+      <li>
+        <strong>less</strong><br>
+        Displays the contents of a file.  
+        <pre><code>less $FILE</code></pre>
+        <p>Navigate with <kbd>↑</kbd> and <kbd>↓</kbd>, quit with <kbd>q</kbd>.</p>
+      </li>
+
+      <li>
+        <strong>man</strong><br>
+        Shows the manual for a command.  
+        <pre><code>man $UTIL</code></pre>
+        <p>Scroll with <kbd>↑</kbd>/<kbd>↓</kbd>, quit with <kbd>q</kbd>.</p>
+      </li>
+
+      <li>
+        <strong>touch</strong><br>
+        Creates a file.  
+        <pre><code>touch $FILE</code></pre>
+      </li>
+
+      <li>
+        <strong>exit</strong><br>
+        Exits the terminal.  
+        <pre><code>exit</code></pre>
+      </li>
+
+      <li>
+        <strong>open</strong><br>
+        Opens a file or directory.  
+        <pre><code>open $FILE</code></pre>
+        <pre><code>open $DIR</code></pre>
+      </li>
+
+      <li>
+        <strong>sudo</strong><br>
+        Runs a command with superuser privileges.  
+        <pre><code>sudo $CMD</code></pre>
+        <p>When prompted, type your password (it will not display as you type).</p>
+	<p>The sudo command for your account is prohibited by APS.</p>
+      </li>
+    </ul>
+
+    <p>Credit to <cite>"https://www.davidbaumgold.com/tutorials/command-line/"</cite></p>
+  </body>
+</html>
+

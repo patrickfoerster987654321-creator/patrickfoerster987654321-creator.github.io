@@ -1,0 +1,11 @@
+class myClass{
+	public static void main(String[] args){
+		m("Hi");
+	}
+}
+
+class java{
+	public String m(String word){
+		System.out.println(word);
+	}
+}
