@@ -1,0 +1,20 @@
+table, th, tr, td{
+	border: 4px dashed red;
+	border-collapse: collapse;
+}
+body{
+	background-color: #abcdef;
+}
+h1{
+	color: #40E0D0;
+}
+#info{
+	background-color:PapayaWhip;
+}
+.highlight{
+	background-color:Chartreuse;
+}
+#animals{
+	text-decoration: underline;
+	text-decoration-style: wavy;
+}

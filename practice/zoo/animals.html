@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Animal Exhibits</title>
     <script src="../js/init.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -19,14 +20,15 @@
     <main>
         <section>
             <h2>Animal Exhibits</h2>
-            <p>Our exhibits showcase animals from different regions of the world. Take a look at the details:</p>
+	    <div id="info">
+		    <p>Our exhibits showcase <span id="animals"> animals </span> from different regions of the world. Take a look at the details:</p>
             <table>
                 <caption>Featured Exhibits</caption>
                 <thead>
                     <tr>
-                        <th>Exhibit</th>
-                        <th>Region</th>
-                        <th>Animals</th>
+                        <th class="highlight">Exhibit</th>
+			<th class="highlight">Region</th>
+                        <th class="highlight">Animals</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +49,7 @@
                     </tr>
                 </tbody>
             </table>
+	    </div>
         </section>
     </main>
     <footer>
