@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Ice Cream Form</title>
+		<meta charset="UTF-8">
+		<script src="../js/validate.js"></script>
+	</head>
+	<body>
+		<form action="https://httpbin.org/post" method="POST">
+			<label for="name">What is your name?</label>
+			<input type="text" name="yourname" required>
+			<br>
+			<label for="email">What is your email address?</label>
+			<input type="email" name="email" required>
+			<br>
+			<label for="phonenumber">What is your phone number</label>
+			<input type="text" name="phonenumber" required>
+			<br>
+			<label for="population">How many people will you bring to the party</label>
+			<input type="number" name="population" required>
+			<br>
+			<label for="flavor">What is your favorite flavor of ice cream?</label>
+			<button type="submit">Submit</button>
+			<button type="reset">Reset</button>
+		</form>
+	</body>
+</html>
