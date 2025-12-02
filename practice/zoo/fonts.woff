@@ -1,0 +1,6 @@
+        @font-face {
+            font-family: 'MyBarcodeFont';
+            src: url('mybarcodefont.woff2') format('woff2'),
+                 url('mybarcodefont.woff') format('woff');
+            /* Add other formats like .ttf if needed */
+        }
