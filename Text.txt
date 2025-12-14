@@ -1,0 +1,348 @@
+
+life_rpg/
+  config.json
+  habitica_client.py
+  xp_engine.py
+  focus_session.py
+  blocker.py
+  requirements.txt
+
+
+Requirements.txt:(
+
+requests)
+
+pip install -r requirements.txt
+
+Config.json:(
+
+{
+  "habitica_user_id": "e9081a8c-926f-4204-9a60-e8af27c61cc6",
+  "habitica_api_token": "2a93ebe5-1a72-4807-afec-767c6656246e",
+  "xp_per_difficulty": {
+    "trivial": 5,
+    "easy": 10,
+    "medium": 20,
+    "hard": 40
+  },
+  "xp_per_level": 100,
+  "state_file": "player_state.json"
+}
+)
+
+habitica_client.py:(
+
+import requests
+import json
+import os
+
+with open("config.json", "r") as f:
+    CONFIG = json.load(f)
+
+BASE_URL = "https://habitica.com/api/v3"
+
+
+class HabiticaClient:
+    def __init__(self, user_id: str, api_token: str):
+        self.user_id = user_id
+        self.api_token = api_token
+        self.headers = {
+            "x-api-user": self.user_id,
+            "x-api-key": self.api_token,
+            "Content-Type": "application/json"
+        }
+
+    def get_tasks(self, task_type=None):
+        """
+        task_type can be: 'habits', 'dailys', 'todos', 'rewards', or None for all.
+        """
+        url = f"{BASE_URL}/tasks/user"
+        params = {}
+        if task_type:
+            params["type"] = task_type
+        resp = requests.get(url, headers=self.headers, params=params)
+        resp.raise_for_status()
+        return resp.json()["data"]
+
+    def get_user(self):
+        url = f"{BASE_URL}/user"
+        resp = requests.get(url, headers=self.headers)
+        resp.raise_for_status()
+        return resp.json()["data"]
+
+    def score_task(self, task_id: str, direction: str = "up"):
+        """
+        direction: 'up' for completing / doing positive action
+        """
+        url = f"{BASE_URL}/tasks/{task_id}/score/{direction}"
+        resp = requests.post(url, headers=self.headers)
+        resp.raise_for_status()
+        return resp.json()["data"]
+
+
+def get_client_from_config() -> HabiticaClient:
+    return HabiticaClient(
+        user_id=CONFIG["habitica_user_id"],
+        api_token=CONFIG["habitica_api_token"]
+    )
+)
+
+xp_engine.py:(
+
+import json
+import os
+from datetime import datetime
+from typing import Dict, Any
+from habitica_client import get_client_from_config, CONFIG
+
+
+class XPEngine:
+    def __init__(self, state_file: str, xp_per_level: int, xp_per_difficulty: Dict[str, int]):
+        self.state_file = state_file
+        self.xp_per_level = xp_per_level
+        self.xp_per_difficulty = xp_per_difficulty
+        self.client = get_client_from_config()
+        self.state = self._load_state()
+
+    def _load_state(self) -> Dict[str, Any]:
+        if os.path.exists(self.state_file):
+            with open(self.state_file, "r") as f:
+                return json.load(f)
+        # default state
+        return {
+            "xp": 0,
+            "level": 1,
+            "last_task_timestamps": {},  # track last completion date per task
+            "log": []
+        }
+
+    def _save_state(self):
+        with open(self.state_file, "w") as f:
+            json.dump(self.state, f, indent=2)
+
+    def _add_log(self, message: str):
+        entry = {
+            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "message": message
+        }
+        self.state["log"].append(entry)
+
+    def _gain_xp(self, amount: int, reason: str):
+        self.state["xp"] += amount
+        self._add_log(f"+{amount} XP: {reason}")
+        # handle leveling
+        while self.state["xp"] >= self.xp_per_level:
+            self.state["xp"] -= self.xp_per_level
+            self.state["level"] += 1
+            self._add_log(f"LEVEL UP! You are now level {self.state['level']}.")
+
+    def sync_from_habitica(self):
+        """
+        Pull tasks from Habitica and award XP for newly completed todos.
+        This is simplistic but works as a base.
+        """
+        tasks = self.client.get_tasks(task_type="todos")
+        for task in tasks:
+            # completed todos have 'completed': True
+            if not task.get("completed"):
+                continue
+
+            task_id = task["id"]
+            completed_date = task.get("dateCompleted")
+            if not completed_date:
+                continue
+
+            last_tracked = self.state["last_task_timestamps"].get(task_id)
+
+            # If we've already counted this completion, skip
+            if last_tracked == completed_date:
+                continue
+
+            difficulty = task.get("priority", 1)
+            # Habitica priority: 0.1 (trivial), 1 (easy), 1.5 (medium), 2 (hard)
+            if difficulty <= 0.1:
+                diff_label = "trivial"
+            elif difficulty <= 1:
+                diff_label = "easy"
+            elif difficulty <= 1.5:
+                diff_label = "medium"
+            else:
+                diff_label = "hard"
+
+            xp_gain = self.xp_per_difficulty.get(diff_label, 10)
+            self._gain_xp(xp_gain, f"Completed todo: {task.get('text', 'Unnamed task')} ({diff_label})")
+
+            # mark as counted
+            self.state["last_task_timestamps"][task_id] = completed_date
+
+        self._save_state()
+
+    def get_status(self) -> Dict[str, Any]:
+        return {
+            "level": self.state["level"],
+            "xp": self.state["xp"],
+            "xp_per_level": self.xp_per_level,
+            "progress": f"{self.state['xp']} / {self.xp_per_level}",
+            "log_tail": self.state["log"][-10:]  # last 10 log entries
+        }
+
+
+def main():
+    engine = XPEngine(
+        state_file=CONFIG["state_file"],
+        xp_per_level=CONFIG["xp_per_level"],
+        xp_per_difficulty=CONFIG["xp_per_difficulty"]
+    )
+    engine.sync_from_habitica()
+    status = engine.get_status()
+    print(f"Level: {status['level']}")
+    print(f"XP: {status['xp']} / {status['xp_per_level']}")
+    print("Recent events:")
+    for entry in status["log_tail"]:
+        print(f"- {entry['timestamp']}: {entry['message']}")
+
+
+if __name__ == "__main__":
+    main()
+
+)
+
+Run with: python xp_engine.py
+
+
+focus_session.py:(
+
+import time
+import sys
+from datetime import datetime
+from xp_engine import XPEngine, CONFIG
+
+
+def run_focus_session(minutes: int):
+    engine = XPEngine(
+        state_file=CONFIG["state_file"],
+        xp_per_level=CONFIG["xp_per_level"],
+        xp_per_difficulty=CONFIG["xp_per_difficulty"]
+    )
+
+    start = datetime.now()
+    end = start + timedelta(minutes=minutes)
+
+    print(f"FOCUS SESSION STARTED for {minutes} minutes.")
+    print("-> Turn on your Cold Turkey block (preconfigured).")
+    print("-> Work only on Habitica tasks during this time.")
+    print()
+
+    try:
+        while datetime.now() < end:
+            # periodic sync to pick up completed tasks
+            engine.sync_from_habitica()
+            status = engine.get_status()
+            remaining = (end - datetime.now()).seconds // 60
+            print(f"[{datetime.now().time().strftime('%H:%M:%S')}] "
+                  f"Level {status['level']} | {status['xp']}/{status['xp_per_level']} XP "
+                  f"| ~{remaining} minutes left")
+            time.sleep(60)  # update every minute
+    except KeyboardInterrupt:
+        print("Session aborted early.")
+
+    engine.sync_from_habitica()
+    final_status = engine.get_status()
+    print("\nFOCUS SESSION COMPLETE.")
+    print(f"Final Level: {final_status['level']}")
+    print(f"XP: {final_status['xp']} / {final_status['xp_per_level']}")
+    print("Recent events:")
+    for entry in final_status["log_tail"]:
+        print(f"- {entry['timestamp']}: {entry['message']}")
+
+
+if __name__ == "__main__":
+    from datetime import timedelta
+
+    if len(sys.argv) < 2:
+        print("Usage: python focus_session.py <minutes>")
+        sys.exit(1)
+
+    minutes = int(sys.argv[1])
+    run_focus_session(minutes)
+
+)
+
+Run with: python focus_session.py 45
+
+blocker.py:(
+
+import time
+import os
+import sys
+
+# Path to hosts file depending on OS
+HOSTS_PATH = r"C:\Windows\System32\drivers\etc\hosts" if os.name == "nt" else "/etc/hosts"
+REDIRECT_IP = "127.0.0.1"
+
+# Websites to block
+BLOCK_LIST = [
+    "www.youtube.com",
+    "youtube.com",
+    "www.tiktok.com",
+    "tiktok.com",
+    "www.instagram.com",
+    "instagram.com",
+    "www.reddit.com",
+    "reddit.com"
+]
+
+def block_websites():
+    print("Blocking websites...")
+    with open(HOSTS_PATH, "r+") as file:
+        content = file.read()
+        for site in BLOCK_LIST:
+            entry = f"{REDIRECT_IP} {site}\n"
+            if entry not in content:
+                file.write(entry)
+    print("Websites blocked.")
+
+def unblock_websites():
+    print("Unblocking websites...")
+    with open(HOSTS_PATH, "r+") as file:
+        lines = file.readlines()
+        file.seek(0)
+        for line in lines:
+            if not any(site in line for site in BLOCK_LIST):
+                file.write(line)
+        file.truncate()
+    print("Websites unblocked.")
+
+def focus_session(minutes):
+    print(f"Starting focus session for {minutes} minutes.")
+    block_websites()
+    try:
+        time.sleep(minutes * 60)
+    except KeyboardInterrupt:
+        print("Session interrupted.")
+    unblock_websites()
+    print("Focus session complete.")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage:")
+        print("  python blocker.py block")
+        print("  python blocker.py unblock")
+        print("  python blocker.py focus <minutes>")
+        sys.exit(1)
+
+    command = sys.argv[1]
+
+    if command == "block":
+        block_websites()
+    elif command == "unblock":
+        unblock_websites()
+    elif command == "focus":
+        minutes = int(sys.argv[2])
+        focus_session(minutes)
+    else:
+        print("Unknown command.")
+)
+
+Run with: python blocker.py block or unblock
+
