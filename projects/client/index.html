@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Course pathways for computer science, IT, and related programs.">
     <title>AP Computer Science – Home</title>
     </head>
 <body>
@@ -82,6 +83,16 @@
       </ul>
     </section>
   </main>
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> AP & Computer Science Pathways</p>
+    <p><a href="about.html">Accessibility & contact information</a></p>
+  </footer>
+
+  <script>
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
 </body>
 </html>
-
