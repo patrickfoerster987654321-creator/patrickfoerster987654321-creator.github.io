@@ -1,0 +1,75 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About & Accessibility | APS CS Pathways</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About this site and accessibility statement.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+        <h1>About this site</h1>
+        <p>Design goals, accessibility, and contact information</p>
+      </div>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="courses.html">All Courses</a></li>
+        <li><a href="about.html" aria-current="page">About & Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" class="about-page">
+    <section>
+      <h2>Purpose</h2>
+      <p>
+        This site is a student project that organizes computer science and related courses into clear pathways,
+        helping students understand how classes connect to NOVA degrees, home school options, and IB programs.
+      </p>
+    </section>
+
+    <section>
+      <h2>Accessibility statement</h2>
+      <p>
+        The site is designed to meet WCAG 2.1 AA guidelines, including sufficient color contrast, keyboard
+        navigability, descriptive link text, and semantic HTML structure.
+      </p>
+      <ul>
+        <li>Skip link to jump directly to main content.</li>
+        <li>Headings in logical order (h1, h2, h3).</li>
+        <li>Alt text for meaningful images.</li>
+        <li>High-contrast color palette and focus outlines.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>
+        For questions about the courses or pathways, please contact your teacher or counselor.
+        This site is for informational and planning purposes only.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> APS Computer Science Pathways</p>
+  </footer>
+
+  <script>
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>
+
+
+
