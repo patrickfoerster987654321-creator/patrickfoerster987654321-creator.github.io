@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>My amazing Christmas tree</title>
+		<script src=../js/validate.js"></script>
+<style>
+body{
+	background-image: linear-gradient(to bottom, #ab2280, #4722ab);
+}
+#container{
+	background-color: white;
+	width: 600px;
+	height: 80vh;
+	margin: auto;
+	position: relative;
+}
+#tree{
+	width: 0px;
+	height: 0px;
+	border-bottom: 80vh solid green;
+	border-left: 300px solid transparent;
+	border-right: 300px solid transparent;
+}
+#box{
+	width: 30px;
+	height: 30px;
+	background-image: linear-gradient(to bottom, red, white);
+	position: absolute;
+	top: 400px;
+	left: 300px;
+}
+#circle{
+	width: 30px;
+	height: 30px;
+	background-image: linear-gradient(to bottom, orange, pink);
+	position: absolute;
+	top: 200px;
+	left: 200px;
+	border-radius: 30px;
+}
+#triangle{
+	width: 30px;
+	height: 30px;
+	clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+	background-image: linear-gradient(to bottom, purple, black);
+	position: absolute;
+	top: 300px;
+	left: 300px;
+}
+#trapezoid {
+      height: 33px;
+      width: 100px;
+      clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+      background-image: linear-gradient(to right, white, seagreen);
+      position: absolute;
+      top: 450px;
+      left: 400px;
+}
+#star{
+	width: 100px;
+	height: 100px;
+	background-image: linear-gradient(to bottom, yellow, gold);
+clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+);
+position: absolute;
+top: -50px;
+left: 250px;
+}
+</style>
+	</head>
+	<body>
+		<h1>This is a tree</h1>
+		<div id="container">
+			<div id="tree">
+				<div id="box"></div>
+				<div id="circle"></div>
+				<div id="triangle"></div>
+				<div id="trapezoid"></div>
+				<div id="star"></div>
+			</div>
+		</div>
+	</body>
+</html>

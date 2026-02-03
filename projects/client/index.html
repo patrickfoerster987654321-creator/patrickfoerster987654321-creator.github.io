@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Course pathways for computer science, IT, and related programs.">
+    <title>APS Computer Science – Home</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+<header class="site-header">
+<h1>APS CS Courses</h1>
+<p>Learn more about each course offering</p>
+</div>
+</div>
+<nav aria-label="Main navigation">
+<ul class="nav-list">
+<li><a href="index.html">Home</a></li>
+<li><a href="courses.html" aria-current="page">All Courses</a></li>
+ <li><a href="about.html">About & Contact</a></li>
+</ul>
+</nav>
+</header>
+ <main id="main-content">
+    <section class="hero">
+      <div class="hero-text">
+        <h2>Plan your CS journey</h2>
+        <p>
+          Explore computer science, IT, and digital media courses aligned with NOVA degrees, homeschool options, and IB pathways. Click any course to see details, prerequisites, and how it fits into your plan.
+        </p>
+      </div>
+    </section>
+        <section aria-labelledby="home-school" class="course-group">
+      <h2 id="home-school">Computer Science Courses</h2>
+      <div class="course-columns">
+        <article class="course-category">
+          <h3>Home School Courses</h3>
+          <ul>
+	    <li><a href="courses.html#intro-to-it">Intro to IT</a></li>
+	    <li><a href="courses.html#game-design">Game Design</a></li>
+	    <li><a href="courses.html#robotics">Robotics</a></li>
+	    <li><a href="courses.html#programming">Programming</a></li>
+	    <li><a href="courses.html#computer-programming-advanced">Computer Programming Advanced</a></li>
+	    <li><a href="courses.html#ap-cs-principles">AP Computer Science Principles</a></li>
+            <li><a href="courses.html#ap-cs-a">AP Computer Science A</a></li>
+        </article>
+	</section>
+	<section aria-labelledby="acc-courses" class="course-group">
+	  <h2 id="acc-courses">ACC Courses</h2>
+	  <p>Classes only offered at ACC. These include NOVA DE courses that can help earn associates degrees.</p>
+	  <div class="course-columns">
+	<article class="course-category">
+	  <h3>Recommended starting point</h3>
+	    <a href="courses.html#de-web-design">Web Page Design</a>
+	</article>
+	<article class="course-category">
+	  <h3>NOVA CS Associates</h3>
+	  <ul>
+	    <li><a href="courses.html#de-comp-i">DE Computer Programming I</a></li>
+	    <li><a href="courses.html#de-comp-ii">DE Computer Programming II</a></li>
+	    <li><a href="courses.html#de-comp-iii">DE Computer Programming III</a></li>
+	</article>
+	<article class="course-category">
+	  <h3>NOVA Web Certificate</h3>
+	  <ul>
+	    <li><a href="courses.html#de-database">DE Database Design & Management</a></li>
+	  </ul>
+	</article>
+        <article class="course-category">
+          <h3>NOVA Cybersecurity Associates</h3>
+          <ul>
+            <li><a href="courses.html#de-cyber-i">DE Cybersecurity I</a></li>
+            <li><a href="courses.html#de-cyber-ii">DE Cybersecurity II</a></li>
+            <li><a href="courses.html#de-cyber-iii">DE Cybersecurity III</a></li>
+          </ul>
+        </article>
+        <article class="course-category">
+          <h3>Digital Media & Design</h3>
+          <ul>
+            <li><a href="courses.html#graphics-communication">Graphics Communication Systems</a></li>
+            <li><a href="courses.html#digital-animation">Digital Animation</a></li>
+            <li><a href="courses.html#game-design">Game Design</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+        <section aria-labelledby="ib-heading" class="course-group">
+      <h2 id="ib-heading">IB computer science pathway</h2>
+      <p>International Baccalaureate (IB) courses that build a rigorous CS foundation.</p>
+      <ul class="course-list">
+        <li><a href="courses.html#ib-cs-sl">IB Computer Science SL/HL I</a></li>
+        <li><a href="courses.html#ib-cs-hl2">IB Computer Science HL II</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> APS Computer Science Pathways</p>
+    <p><a href="about.html">Accessibility & contact information</a></p>
+  </footer>
+
+  <script>
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+</body>
+</html>

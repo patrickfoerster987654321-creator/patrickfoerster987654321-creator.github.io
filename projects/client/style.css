@@ -1,0 +1,328 @@
+:root {
+  --color-bg: #0b1020;
+  --color-bg-alt: #151b30;
+  --color-surface: #1f2640;
+  --color-accent: #4fd1c5;
+  --color-accent-dark: #38a89d;
+  --color-text: #f7fafc;
+  --color-text-muted: #cbd5f5;
+  --color-focus: #f6e05e;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* Skip link */
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--color-accent);
+  color: #000;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* Header & nav */
+
+.site-header {
+  background: #050814;
+  border-bottom: 1px solid #2d3748;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.site-header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.site-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+  color: var(--color-accent);
+}
+
+.nav-list a[aria-current="page"] {
+  color: var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+/* Layout */
+
+main {
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Hero */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero-text h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.hero-text p {
+  color: var(--color-text-muted);
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Buttons */
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid transparent;
+}
+
+.button.primary {
+  background: var(--color-accent);
+  color: #000;
+}
+
+.button.primary:hover,
+.button.primary:focus {
+  background: var(--color-accent-dark);
+}
+
+/* Course groups */
+
+.course-group {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: var(--color-surface);
+  border-radius: 12px;
+}
+
+.course-group.alt-bg {
+  background: var(--color-bg-alt);
+}
+
+.course-group h2 {
+  margin-top: 0;
+}
+
+.course-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.course-category h3 {
+  margin-top: 0;
+}
+
+.course-category ul,
+.course-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0;
+}
+
+.course-category li,
+.course-list li {
+  margin-bottom: 0.35rem;
+}
+
+.course-category a,
+.course-list a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.course-category a:hover,
+.course-category a:focus,
+.course-list a:hover,
+.course-list a:focus {
+  text-decoration: underline;
+}
+
+/* Course detail page */
+
+.course-detail-page {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.course-toc {
+  background: var(--color-bg-alt);
+  padding: 1rem;
+  border-radius: 12px;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+}
+
+.course-toc h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.course-toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.course-toc li {
+  margin-bottom: 0.4rem;
+}
+
+.course-toc a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.course-toc a:hover,
+.course-toc a:focus {
+  color: var(--color-accent);
+}
+
+.course-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.course-detail {
+  background: var(--color-surface);
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+}
+
+.course-detail h2 {
+  margin-top: 0;
+}
+
+/* About page */
+
+.about-page section {
+  background: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* Footer */
+
+.site-footer {
+  border-top: 1px solid #2d3748;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Focus styles */
+
+a:focus,
+button:focus,
+[tabindex]:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .course-detail-page {
+    grid-template-columns: 1fr;
+  }
+
+  .course-toc {
+    position: static;
+    order: -1;
+    margin-bottom: 1rem;
+  }
+
+  .site-header {
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .nav-list {
+    flex-wrap: wrap;
+  }
+}
+
