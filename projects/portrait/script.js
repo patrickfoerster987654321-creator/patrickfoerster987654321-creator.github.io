@@ -49,3 +49,9 @@ ctx.lineTo(480, 470);
 ctx.lineTo(450, 470);
 ctx.closePath();
 ctx.fill();
+
+//add head
+ctx.fillStyle = "#f2c29b";
+ctx.beginPath();
+ctx.arc(400, 330, 130, 0, Math.PI*2);
+ctx.fill();
