@@ -70,3 +70,34 @@ ctx.fillStyle = "#2b2523";
 ctx.beginPath();
 ctx.arc(400, 280, 140, Math.PI, 0);
 ctx.fill();
+
+//add hair spikes
+ctx.beginPath();
+ctx.moveTo(300, 260);
+ctx.lineTo(320, 220);
+ctx.lineTo(340, 260);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(360, 250);
+ctx.lineTo(380, 210);
+ctx.lineTo(400, 250);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(420, 250);
+ctx.lineTo(440, 210);
+ctx.lineTo(460, 250);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(460, 260);
+ctx.lineTo(480, 225);
+ctx.lineTo(500, 265);
+ctx.closePath();
+ctx.fill();
+
+
