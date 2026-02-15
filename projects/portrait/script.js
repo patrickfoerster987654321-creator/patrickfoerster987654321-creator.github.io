@@ -64,3 +64,9 @@ ctx.fill();
 //add right ear
 ctx.beginPath();
 ctx.arc(530, 330, 25, 0, Math.PI*2);
+
+//add hair cap
+ctx.fillStyle = "#2b2523";
+ctx.beginPath();
+ctx.arc(400, 280, 140, Math.PI, 0);
+ctx.fill();
