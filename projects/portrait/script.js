@@ -9,20 +9,6 @@ img.onload = () => {
 	ctx.drawImage(img, 0, 0);
 }
 
-//make the face outline
-
-//add mouth
-
-//add nose
-
-//add left eye
-
-//add right eye
-
-//add eyebrows
-
-//add hair
-
-//add neck
-
-
+//add clothes
+ctx.fillStyle= "#222233";
+ctx.fillRect(260, 480, 280, 220);
