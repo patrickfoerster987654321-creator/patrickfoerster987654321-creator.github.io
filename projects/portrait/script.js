@@ -155,3 +155,14 @@ ctx.lineTo(425, 410);
 ctx.lineTo(375, 410);
 ctx.closePath();
 ctx.fill();
+
+//add highlight to lower lip
+ctx.fillStyle = "#e89a8a";
+ctx.beginPath();
+ctx.moveTo(380, 410);
+ctx.lineTo(420, 410);
+ctx.lineTo(415, 417);
+ctx.lineTo(385, 417);
+ctx.closePath();
+ctx.fill();
+
