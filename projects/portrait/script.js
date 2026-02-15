@@ -29,3 +29,6 @@ ctx.lineTo(540, 620);
 ctx.closePath();
 ctx.fill();
 
+//add neck
+ctx.fillStyle = "#f2c29b";
+ctx.fillRect(350, 430, 100, 70);
