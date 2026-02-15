@@ -100,4 +100,12 @@ ctx.lineTo(500, 265);
 ctx.closePath();
 ctx.fill();
 
+//add eye white
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.arc(360, 320, 25, 0, Math.PI*2);
+ctx.fill();
 
+ctx.beginPath();
+ctx.arc(440, 320, 25, 0, Math.PI*2);
+ctx.fill();
