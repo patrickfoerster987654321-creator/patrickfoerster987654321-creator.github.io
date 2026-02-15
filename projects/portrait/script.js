@@ -22,6 +22,12 @@ ctx.lineTo(540, 620);
 ctx.closePath();
 ctx.fill();
 
+//add arms
+ctx.fillStyle = "#f2c29b";
+ctx.fillRect(550, 620, 40, 80);
+
+ctx.fillRect(210, 620, 40, 80);
+
 //add neck
 ctx.fillStyle = "#f2c29b";
 ctx.fillRect(350, 430, 100, 70);
@@ -47,21 +53,26 @@ ctx.fill();
 ctx.fillStyle = "#f2c29b";
 ctx.beginPath();
 ctx.arc(400, 330, 130, 0, Math.PI*2);
+ctx.closePath();
 ctx.fill();
 
 //add left ear
 ctx.beginPath();
 ctx.arc(270, 330, 25, 0, Math.PI*2);
+ctx.closePath();
 ctx.fill();
 
 //add right ear
 ctx.beginPath();
 ctx.arc(530, 330, 25, 0, Math.PI*2);
+ctx.closePath();
+ctx.fill();
 
 //add hair cap
 ctx.fillStyle = "#2b2523";
 ctx.beginPath();
 ctx.arc(400, 280, 140, Math.PI, 0);
+ctx.closePath()
 ctx.fill();
 
 //add hair spikes
@@ -93,42 +104,44 @@ ctx.lineTo(500, 265);
 ctx.closePath();
 ctx.fill();
 
-//add eye white(1)
+//add eye white
 ctx.fillStyle = "#ffffff";
 ctx.beginPath();
 ctx.arc(360, 320, 25, 0, Math.PI*2);
+ctx.closePath();
 ctx.fill();
 
-//2
 ctx.beginPath();
 ctx.arc(440, 320, 25, 0, Math.PI*2);
+ctx.closePath();
 ctx.fill();
 
-//add pupils(1)
-ctx.fillStyle = "#2b2523";
-ctx.beginPath();
-ctx.arc(360, 320, 10, 0, Math.PI*2);
-ctx.fill();
-
-//2
-ctx.beginPath();
-ctx.arc(440, 320, 10, 0, Math.PI*2);
-ctx.fill();
-
-//add irises(1)
+//add irises
 ctx.fillStyle = "#444444";
 ctx.beginPath();
 ctx.arc(360, 320, 15, 0, Math.PI*2);
 ctx.closePath();
 ctx.fill();
 
-//2
 ctx.beginPath();
 ctx.arc(440, 320, 15, 0, Math.PI*2);
 ctx.closePath();
 ctx.fill();
 
+//add pupils
+ctx.fillStyle = "#2b2523";
+ctx.beginPath();
+ctx.arc(360, 320, 10, 0, Math.PI*2);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(440, 320, 10, 0, Math.PI*2);
+ctx.closePath();
+ctx.fill();
+
 //add eyebrows
+ctx.fillStyle = "#2b2523";
 ctx.beginPath();
 ctx.moveTo(335, 295);
 ctx.lineTo(385, 290);
