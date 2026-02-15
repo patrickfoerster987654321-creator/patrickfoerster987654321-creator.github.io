@@ -166,3 +166,21 @@ ctx.lineTo(385, 417);
 ctx.closePath();
 ctx.fill();
 
+//add neck shadow
+ctx.fillStyle = "#d69b74";
+ctx.beginPath();
+ctx.moveTo(350, 430);
+ctx.lineTo(450, 430);
+ctx.lineTo(440, 460);
+ctx.lineTo(360, 460);
+ctx.closePath();
+ctx.fill();
+
+//add hair shine
+ctx.fillStyle = "#ffffff";
+ctx.beginPath();
+ctx.moveTo(430, 230);
+ctx.lineTo(470, 240);
+ctx.lineTo(450, 255);
+ctx.closePath();
+ctx.fill();
