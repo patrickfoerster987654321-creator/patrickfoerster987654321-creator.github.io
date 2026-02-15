@@ -145,3 +145,13 @@ ctx.lineTo(385, 370);
 ctx.lineTo(415, 370);
 ctx.closePath();
 ctx.fill();
+
+//add mouth
+ctx.fillStyle = "#c46a5a";
+ctx.beginPath();
+ctx.moveTo(365, 395);
+ctx.lineTo(435, 395);
+ctx.lineTo(425, 410);
+ctx.lineTo(375, 410);
+ctx.closePath();
+ctx.fill();
