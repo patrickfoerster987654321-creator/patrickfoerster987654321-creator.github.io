@@ -120,3 +120,19 @@ ctx.beginPath();
 ctx.arc(440, 320, 10, 0, Math.PI*2);
 ctx.fill();
 
+//add eyebrows
+ctx.beginPath();
+ctx.moveTo(335, 295);
+ctx.lineTo(385, 290);
+ctx.lineTo(385, 300);
+ctx.lineTo(335, 305);
+ctx.closePath();
+ctx.fill();
+
+ctx.beginPath();
+ctx.moveTo(415, 290);
+ctx.lineTo(465, 295);
+ctx.lineTo(465, 305);
+ctx.lineTo(415, 300);
+ctx.closePath();
+ctx.fill();
