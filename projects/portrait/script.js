@@ -2,13 +2,6 @@
 const canvas = document.getElementById("me");
 const ctx = canvas.getContext("2d");
 
-//make image background
-const img = new Image();
-img.src = "me.png";
-img.onload = () => {
-    ctx.drawImage(img, 0, 0);
-};
-
 //add clothes
 ctx.fillStyle= "#222233";
 ctx.fillRect(260, 480, 280, 220);
@@ -73,51 +66,66 @@ ctx.fill();
 
 //add hair spikes
 ctx.beginPath();
-ctx.moveTo(300, 260);
+ctx.moveTo(300, 300);
 ctx.lineTo(320, 220);
 ctx.lineTo(340, 260);
 ctx.closePath();
 ctx.fill();
 
 ctx.beginPath();
-ctx.moveTo(360, 250);
+ctx.moveTo(360, 300);
 ctx.lineTo(380, 210);
 ctx.lineTo(400, 250);
 ctx.closePath();
 ctx.fill();
 
 ctx.beginPath();
-ctx.moveTo(420, 250);
+ctx.moveTo(420, 300);
 ctx.lineTo(440, 210);
 ctx.lineTo(460, 250);
 ctx.closePath();
 ctx.fill();
 
 ctx.beginPath();
-ctx.moveTo(460, 260);
+ctx.moveTo(460, 310);
 ctx.lineTo(480, 225);
 ctx.lineTo(500, 265);
 ctx.closePath();
 ctx.fill();
 
-//add eye white
+//add eye white(1)
 ctx.fillStyle = "#ffffff";
 ctx.beginPath();
 ctx.arc(360, 320, 25, 0, Math.PI*2);
 ctx.fill();
 
+//2
 ctx.beginPath();
 ctx.arc(440, 320, 25, 0, Math.PI*2);
 ctx.fill();
 
-//add pupils
+//add pupils(1)
 ctx.fillStyle = "#2b2523";
 ctx.beginPath();
 ctx.arc(360, 320, 10, 0, Math.PI*2);
 ctx.fill();
 
+//2
 ctx.beginPath();
 ctx.arc(440, 320, 10, 0, Math.PI*2);
+ctx.fill();
+
+//add irises(1)
+ctx.fillStyle = "#444444";
+ctx.beginPath();
+ctx.arc(360, 320, 15, 0, Math.PI*2);
+ctx.closePath();
+ctx.fill();
+
+//2
+ctx.beginPath();
+ctx.arc(440, 320, 15, 0, Math.PI*2);
+ctx.closePath();
 ctx.fill();
 
 //add eyebrows
