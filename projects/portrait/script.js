@@ -55,3 +55,12 @@ ctx.fillStyle = "#f2c29b";
 ctx.beginPath();
 ctx.arc(400, 330, 130, 0, Math.PI*2);
 ctx.fill();
+
+//add left ear
+ctx.beginPath();
+ctx.arc(270, 330, 25, 0, Math.PI*2);
+ctx.fill();
+
+//add right ear
+ctx.beginPath();
+ctx.arc(530, 330, 25, 0, Math.PI*2);
