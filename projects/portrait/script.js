@@ -136,3 +136,12 @@ ctx.lineTo(465, 305);
 ctx.lineTo(415, 300);
 ctx.closePath();
 ctx.fill();
+
+//add nose
+ctx.fillStyle = "#e0a982";
+ctx.beginPath();
+ctx.moveTo(400, 330);
+ctx.lineTo(385, 370);
+ctx.lineTo(415, 370);
+ctx.closePath();
+ctx.fill();
