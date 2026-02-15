@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>An amazing heart</title>
+	</head>
+	<body>
+		<h1>This is a heart</h1>
+		<canvas id="heart" width="800" height="800"></canvas>
+		<script>
+			const canvas = document.getElementById("heart");
+			const ctx = canvas.getContext("2d");
+
+			//an arc
+			ctx.fillStyle = "pink";
+			ctx.strokeStyle = "red";
+ 			ctx.lineWidth = 10;
+                        ctx.beginPath();
+                        ctx.arc(200,200,200,-Math.PI,0);
+                        ctx.fill();
+                        ctx.stroke();
+			ctx.beginPath();
+			ctx.arc(600,200,200,-Math.PI,0);
+			ctx.fill();
+			ctx.stroke();
+			ctx.beginPath();
+                        ctx.moveTo(800, 200);
+                        ctx.lineTo(400, 800);
+                        ctx.lineTo(0, 200);
+			ctx.fill();
+                        ctx.stroke();
+		</script>
+	</body>
+</html>

@@ -2,11 +2,14 @@
 const canvas = document.getElementById("me");
 const ctx = canvas.getContext("2d");
 
+//add face image
+const img = new Image();
+img.src="me.png";
+img.onload = () => {
+	ctx.drawImage(img, 0, 0);
+}
+
 //make the face outline
-ctx.fillStyle = "#FFE5B4";
-ctx.beginPath();
-ctx.arc(400,400,100,0,2*Math.PI);
-ctx.fill();
 
 //add mouth
 
