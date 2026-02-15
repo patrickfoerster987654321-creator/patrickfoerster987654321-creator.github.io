@@ -109,3 +109,14 @@ ctx.fill();
 ctx.beginPath();
 ctx.arc(440, 320, 25, 0, Math.PI*2);
 ctx.fill();
+
+//add pupils
+ctx.fillStyle = "#2b2523";
+ctx.beginPath();
+ctx.arc(360, 320, 10, 0, Math.PI*2);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(440, 320, 10, 0, Math.PI*2);
+ctx.fill();
+
