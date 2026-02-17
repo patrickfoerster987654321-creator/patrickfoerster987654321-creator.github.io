@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Canvas functions</title>
+	</head>
+	<body>
+		<h1>Canvas with functions</h1>
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<script>
+			//lines of magic
+			const canvas = document.getElementById("canvas");
+			const ctx = canvas.getContext("2d");
+
+			function makeOneCircle(color,x,y,radius,start,finish){
+				start = 0;
+				finish = Math.PI*2;
+				ctx.fillStyle = color;
+				ctx.beginPath();
+				ctx.arc(x, y, radius, start, finish);
+				ctx.closePath();
+				ctx.fill();
+			}
+
+			makeOneCircle("green", 100, 100, 100);
+			makeOneCircle("yellow", 300, 200, 100);
+
+			function drawSnowman(x,y,radius, color){
+				color = "#000000";
+				makeOneCircle(color, x, y, radius);
+				makeOneCircle(color, x, y+100, radius+50);
+				makeOneCircle(color, x, y+200, radius+100);
+			}
+			drawSnowman(600, 100, 50);
+		</script>
+	</body>
+</html>
