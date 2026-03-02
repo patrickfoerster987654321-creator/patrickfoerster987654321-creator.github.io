@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <title>Shape Parade</title>
+    <style>
+        canvas{ 
+		border: 1px solid black;
+	}
+    </style>
+</head>
+<body>
+	<h1>Parade!</h1>
+    <canvas id="paradeCanvas" width="800" height="800"></canvas>
+    <script>
+	//2 magic lines    
+        const canvas = document.getElementById("paradeCanvas");
+        const ctx = canvas.getContext("2d");
+
+        //Make an array to store each shape
+        let shapes = [
+            { x: 0, y: 100, size: 50, color: "red", type: "circle", speed: 2 },
+            { x: -200, y: 200, size: 50, color: "blue", type: "square", speed: 2 },
+            { x: -400, y: 400, size: 50, color: "green", type: "triangle", speed: 2 }
+        ];
+
+        function animate() {
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	//Use array iteration method	
+            shapes.forEach(shape => {
+                ctx.beginPath();
+                ctx.fillStyle = shape.color;
+		//if loops to select each shape and animate them
+                if (shape.type === "circle") {
+                    ctx.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
+                } else if (shape.type === "square") {
+                    ctx.rect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
+                } else if (shape.type === "triangle") {
+                    ctx.moveTo(shape.x, shape.y - shape.size / 2);
+                    ctx.lineTo(shape.x + shape.size / 2, shape.y + shape.size / 2);
+                    ctx.lineTo(shape.x - shape.size / 2, shape.y + shape.size / 2);
+                    ctx.closePath();
+                }
+                ctx.fill();
+
+                // Move shape
+                shape.x += shape.speed;
+
+                // Reset position if it goes off-screen
+                if (shape.x > canvas.width + 50) {
+                    shape.x = -50;
+                }
+            });
+
+            requestAnimationFrame(animate);
+	}
+
+        animate(); // Start animation
+    </script>
+</body>
+</html>

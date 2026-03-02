@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Animation</title>
+<style>
+canvas{
+	border: 1px solid black;
+}
+</style>
+	</head>
+	<body>
+		<h1>Look at these cool animations</h1>
+		<canvas id="id" height="800" width="800">
+		</canvas>
+		<script>
+			const canvas = document.getElementById("id");
+			const ctx = canvas.getContext("2d");
+			let x = 1;
+			let x2 = 1;
+			let dx = 5;
+			let dx2 = 5;
+			let time = 0;
+			function animate(){
+				time = time + 1;
+				if (time < 1.0){
+					x = x + dx;
+				}
+				if (time > 100){
+					x2 = x2 + dx2;
+				}
+				if (x>700 || x<0){
+					dx = dx * -1;
+				}
+				if (x2>600 || x2<0){
+					dx2 = dx2 * -1;
+				}
+				ctx.clearRect(0,0,800,800);
+				ctx.fillRect(x,100,100,100);
+				ctx.fillRect(x2,200,200,200);
+				requestAnimationFrame(animate);
+			}
+			animate();
+		</script>
+	</body>
+</html>
