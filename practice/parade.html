@@ -1,62 +1,138 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
     <title>Shape Parade</title>
     <style>
         canvas{ 
-		border: 1px solid black;
-	}
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
-	<h1>Parade!</h1>
+    <h1>Parade!</h1>
     <canvas id="paradeCanvas" width="800" height="800"></canvas>
+
     <script>
-	//2 magic lines    
         const canvas = document.getElementById("paradeCanvas");
         const ctx = canvas.getContext("2d");
 
-        //Make an array to store each shape
-        let shapes = [
-            { x: 0, y: 100, size: 50, color: "red", type: "circle", speed: 2 },
-            { x: -200, y: 200, size: 50, color: "blue", type: "square", speed: 2 },
-            { x: -400, y: 400, size: 50, color: "green", type: "triangle", speed: 2 }
-        ];
+        // Shape 1: Circle
+        let x1 = 0,    y1 = 100, size1 = 50, color1 = "red",   type1 = "circle",   speed1 = 2;
+
+        // Shape 2: Square
+        let x2 = -200, y2 = 200, size2 = 60, color2 = "blue",  type2 = "square",   speed2 = 2;
+
+        // Shape 3: Triangle
+        let x3 = -400, y3 = 400, size3 = 60, color3 = "green", type3 = "triangle", speed3 = 2;
+
+        // Shape 4: Bear (square body + rectangle head)
+        let x4 = -600, y4 = 550, size4 = 80, color4 = "brown", type4 = "bear", speed4 = 2;
+
+        // Shape 5: Knight (helmet + body + shield + spear)
+        let x5 = -800, y5 = 300, size5 = 70, color5 = "gray", type5 = "knight", speed5 = 2;
 
         function animate() {
-            // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	//Use array iteration method	
-            shapes.forEach(shape => {
-                ctx.beginPath();
-                ctx.fillStyle = shape.color;
-		//if loops to select each shape and animate them
-                if (shape.type === "circle") {
-                    ctx.arc(shape.x, shape.y, shape.size / 2, 0, Math.PI * 2);
-                } else if (shape.type === "square") {
-                    ctx.rect(shape.x - shape.size / 2, shape.y - shape.size / 2, shape.size, shape.size);
-                } else if (shape.type === "triangle") {
-                    ctx.moveTo(shape.x, shape.y - shape.size / 2);
-                    ctx.lineTo(shape.x + shape.size / 2, shape.y + shape.size / 2);
-                    ctx.lineTo(shape.x - shape.size / 2, shape.y + shape.size / 2);
-                    ctx.closePath();
+            for (let i = 1; i <= 5; i++) {
+                let x, y, size, color, type, speed;
+
+                // Select variables for each shape with a switch, a more complicated and practical if loop where you take one variable and if cases are met, than run the actions in it, but don't forget break, because it will bleed to the next case
+                switch (i) {
+                    case 1: x = x1; y = y1; size = size1; color = color1; type = type1; speed = speed1; break;
+                    case 2: x = x2; y = y2; size = size2; color = color2; type = type2; speed = speed2; break;
+                    case 3: x = x3; y = y3; size = size3; color = color3; type = type3; speed = speed3; break;
+                    case 4: x = x4; y = y4; size = size4; color = color4; type = type4; speed = speed4; break;
+                    case 5: x = x5; y = y5; size = size5; color = color5; type = type5; speed = speed5; break;
                 }
+
+                ctx.fillStyle = color;
+                ctx.beginPath();
+
+                if (type === "circle") {
+                    ctx.arc(x, y, size / 2, 0, Math.PI * 2);
+
+                } else if (type === "square") {
+                    ctx.rect(x - size / 2, y - size / 2, size, size);
+
+                } else if (type === "triangle") {
+                    ctx.moveTo(x, y - size / 2);
+                    ctx.lineTo(x + size / 2, y + size / 2);
+                    ctx.lineTo(x - size / 2, y + size / 2);
+                    ctx.closePath();
+
+                } else if (type === "bear") {
+                    // Bear body
+                    ctx.fillRect(x - size / 2, y - size / 2, size, size);
+                    // Bear head
+                    ctx.fillRect(x - size / 4, y - size, size / 2, size / 2);
+                    ctx.beginPath();
+
+                } else if (type === "knight") {
+                    // Knight helmet (rectangle)
+                    ctx.fillStyle = "silver";
+                    ctx.fillRect(x - size/4, y - size, size/2, size/2);
+
+                    // Helmet plume (triangle)
+                    ctx.beginPath();
+                    ctx.fillStyle = "red";
+                    ctx.moveTo(x, y - size - 20);
+                    ctx.lineTo(x + 10, y - size);
+                    ctx.lineTo(x - 10, y - size);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // Knight body (rectangle)
+                    ctx.fillStyle = "gray";
+                    ctx.fillRect(x - size/2, y - size/2, size, size);
+
+                    // Shield (circle)
+                    ctx.beginPath();
+                    ctx.fillStyle = "blue";
+                    ctx.arc(x - size/1.5, y, size/4, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Spear (line)
+                    ctx.strokeStyle = "brown";
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(x + size/2, y);
+                    ctx.lineTo(x + size, y - 40);
+                    ctx.stroke();
+
+                    // Spear tip (triangle)
+                    ctx.fillStyle = "silver";
+                    ctx.beginPath();
+                    ctx.moveTo(x + size, y - 40);
+                    ctx.lineTo(x + size + 10, y - 45);
+                    ctx.lineTo(x + size + 10, y - 35);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    ctx.beginPath(); // reset path
+                }
+
                 ctx.fill();
 
                 // Move shape
-                shape.x += shape.speed;
+                x += speed;
+                if (x > canvas.width + 150) x = -150;
 
-                // Reset position if it goes off-screen
-                if (shape.x > canvas.width + 50) {
-                    shape.x = -50;
+                // Write updated x back
+                switch (i) {
+                    case 1: x1 = x; break;
+                    case 2: x2 = x; break;
+                    case 3: x3 = x; break;
+                    case 4: x4 = x; break;
+                    case 5: x5 = x; break;
                 }
-            });
+            }
 
             requestAnimationFrame(animate);
-	}
+        }
 
-        animate(); // Start animation
+        animate();
     </script>
 </body>
 </html>
+
