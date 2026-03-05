@@ -1,6 +1,6 @@
 My game title is Stuck on Roosevelt Island. 
 Image:
-![A map of the island](Map.jpg)
+![A map of the island](Map.jpeg)
 Setting:
 Roosevelt Island is a real island near Rosslyn. It has 3 trails, Woods, Upland, and Swamp. It also has a memorial plaza, restrooms, and a little island within swimming distance. There is a bridge connecting the island to Rosslyn.
 Story:
