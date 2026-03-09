@@ -8,38 +8,57 @@ let gameActive = true; //this variable is required.
 
 
 //Make one function for each location
-function locationA() {
+function brokenBridge() {
     clear();
-    print("\nYou are in location A!");
+    print("\nYou are at the broken bridge!");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tlocationB");
+        "\n\tRestrooms" + "\n\tMemorial Plaza");
     
     function processInput(input){
-        if (input.toLowerCase() === "locationb") {
-            locationB();
-        } else {
+        if (input.toLowerCase() === "memorialplaza" || "memorial plaza") {
+            memorialPlaza();
+        } else if (input.toLowerCase() === "restrooms") {
+		restrooms();
+	} else {
             stayHere();
-            waitThenCall(locationA);
+            waitThenCall(brokenBridge);
         }
     }
     waitForInput(processInput);
 }
 
-function locationB() {
+function memorialPlaza() {
     clear();
-    print("\nYou are in location B!");
+    print("\nYou are in the Memorial Plaza");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tlocationA");
+        "\n\tBroken Bridge");
     
     function processInput(input){
-        if (input.toLowerCase() === "locationa") {
-            locationA();
+        if (input.toLowerCase() === "brokenbridge" || "broken bridge") {
+            brokenBridge();
         } else {
             stayHere();
-            waitThenCall(locationB);
+            waitThenCall(memorialPlaza);
         }
     }
     waitForInput(processInput);
+}
+
+function restrooms() {
+	clear();
+	print("\nYou are at the Restrooms!");
+	print("\nWhere do you want to go next? Say one of these choices:" +
+	"\n\tBroken Bridge");
+
+ 	function processInput(input){
+ 		if (input.toLowerCase() === "brokenbridge" || "broken bridge") {
+			brokenBridge();
+		} else {
+			stayHere();
+			waitThenCall(restrooms);
+		}
+	}
+	waitForInput(processInput);
 }
 
 //finally, make sure you customize this to tell it what should happen at the
@@ -49,7 +68,7 @@ function start(){
     print("Welcome to my game! Press any key to start");
 
     function processInput(input){
-            locationA();
+            brokenBridge();
     }
     waitForInput(processInput);
 }
