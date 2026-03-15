@@ -16,7 +16,36 @@ let treesMemorialPlaza = 5;
 let treesLittleIsland = 5;
 
 //If you need, add any "helper" functions here
+function useAction() {
+	actions++;
+	if (actions >= 5) {
+		sleep();
+	}
+}
 
+function sleep() {
+	clear();
+	print("You feel tired and fall asleep...");
+	actions = 0;
+	day ++;
+	if (day > 30){
+		gameOver();
+		return;
+	}
+	print("\nDay " + day + " begins.");
+}
+
+function gameOver() {
+	clear();
+	print("You failed to escape in 30 days. Starving, you fall over and don't wake up");
+	gameActive = false;
+}
+
+function collectWater() {
+	water++;
+	print("\nYou collected water. Total water: " + water);
+	useAction();
+}
 
 //Make one function for each location
 function brokenBridge() {
