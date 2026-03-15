@@ -15,11 +15,9 @@ let treesSwampTrail = 5;
 let treesWoodsTrail = 5;
 let treesUplandTrail = 5;
 let treesLittleIsland = 5;
+let treesPlaza = 5;
 
-// Delay helper
-function pauseThen(next){
-    setTimeout(next,2000);
-}
+// My helpers
 
 // Status display
 function showStatus(){
@@ -28,25 +26,19 @@ function showStatus(){
 
 // Action system
 function useAction(){
-
     actions++;
-
     if(actions >= 5){
         sleep();
         return true;
     }
-
     return false;
 }
-
+//sleep
 function sleep(){
-
     clear();
     print("You feel tired and fall asleep...");
-
     actions = 0;
     day++;
-
     // Water consumption
     if(water > 0){
         water--;
@@ -62,27 +54,26 @@ function sleep(){
         gameOverThirst();
         return;
     }
-
+//game over
     if(day > 30){
         gameOver();
         return;
     }
-
     print("\nDay " + day + " begins.");
 }
-
+//game over
 function gameOver(){
     clear();
     print("You failed to escape. You collapse from exhaustion.");
     gameActive = false;
 }
-
+//no water version
 function gameOverThirst(){
     clear();
     print("You went three days without water and collapse from dehydration.");
     gameActive = false;
 }
-
+//victory
 function winGame(){
     clear();
     print("You rebuilt the bridge and escaped! You win!");
@@ -95,44 +86,46 @@ function collectWater(){
     water++;
     print("\nYou collected water. Total water: " + water);
 
-    if(!useAction()) pauseThen(currentLocation);
+    if(!useAction()){ waitThenCall(currentLocation);}
 }
 
 function chopTree(location){
 
     if(!hasAxe){
         print("\nYou need an axe to chop trees.");
-        pauseThen(currentLocation);
+        waitThenCall(currentLocation);
         return;
     }
 
     let treesLeft = 0;
 
-    if(location==="broken") treesLeft = treesBrokenBridge;
-    if(location==="restrooms") treesLeft = treesRestrooms;
-    if(location==="swamp") treesLeft = treesSwampTrail;
-    if(location==="woods") treesLeft = treesWoodsTrail;
-    if(location==="upland") treesLeft = treesUplandTrail;
-    if(location==="island") treesLeft = treesLittleIsland;
+    if(location==="broken"){ treesLeft = treesBrokenBridge;}
+    if(location==="restrooms"){ treesLeft = treesRestrooms;}
+    if(location==="swamp"){ treesLeft = treesSwampTrail;}
+    if(location==="woods"){ treesLeft = treesWoodsTrail;}
+    if(location==="upland"){ treesLeft = treesUplandTrail;}
+    if(location==="island"){ treesLeft = treesLittleIsland;}
+	if(location==="plaza"){ treesLeft = treesPlaza;}
 
     if(treesLeft<=0){
         print("\nNo trees left here.");
-        pauseThen(currentLocation);
+        waitThenCall(currentLocation);
         return;
     }
 
-    if(location==="broken") treesBrokenBridge--;
-    if(location==="restrooms") treesRestrooms--;
-    if(location==="swamp") treesSwampTrail--;
-    if(location==="woods") treesWoodsTrail--;
-    if(location==="upland") treesUplandTrail--;
-    if(location==="island") treesLittleIsland--;
+    if(location==="broken"){ treesBrokenBridge--;}
+    if(location==="restrooms"){ treesRestrooms--;}
+    if(location==="swamp"){ treesSwampTrail--;}
+    if(location==="woods"){ treesWoodsTrail--;}
+    if(location==="upland"){ treesUplandTrail--;}
+    if(location==="island"){ treesLittleIsland--;}
+	if(location==="plaza"){ treesPlaza--;}
 
     wood += 4;
 
     print("\nYou chopped a tree and got 4 planks. Total wood: "+wood);
 
-    if(!useAction()) pauseThen(currentLocation);
+    if(!useAction()){ waitThenCall(currentLocation);}
 }
 
 // ======================
@@ -173,11 +166,11 @@ function brokenBridgeInput(input){
     }
 
     else if(input==="restrooms"){
-        if(!useAction()) restrooms();
+        if(!useAction()){ restrooms();}
     }
 
     else if(input==="memorial plaza"||input==="memorialplaza"){
-        if(!useAction()) memorialPlaza();
+       if(!useAction()){ memorialPlaza();}
     }
 
     else if(input==="rebuild bridge"||input==="rebuildbridge"){
@@ -187,14 +180,14 @@ function brokenBridgeInput(input){
         }
         else{
             print("\nYou need 100 planks. You have "+wood+".");
-            pauseThen(brokenBridge);
+            waiThenCall(brokenBridge);
         }
 
     }
 
     else{
         stayHere();
-        pauseThen(brokenBridge);
+        waitThenCall(brokenBridge);
     }
 }
 
@@ -221,24 +214,24 @@ function memorialInput(input){
     input=input.toLowerCase();
 
     if(input==="broken bridge"||input==="brokenbridge"){
-        if(!useAction()) brokenBridge();
+       	if(!useAction()){brokenBridge();}
     }
 
     else if(input==="woods trail"||input==="woodstrail"){
-        if(!useAction()) woodsTrail();
+        if(!useAction()){woodsTrail();}
     }
 
     else if(input==="swamp trail"||input==="swamptrail"){
-        if(!useAction()) swampTrail();
+        if(!useAction()){swampTrail();}
     }
 
     else if(input==="chop tree"||input==="choptree"){
-        chopTree("woods");
+        chopTree("plaza");
     }
 
     else{
         stayHere();
-        pauseThen(memorialPlaza);
+        waitThenCall(memorialPlaza);
     }
 }
 
@@ -273,16 +266,16 @@ function restroomsInput(input){
     }
 
     else if(input==="broken bridge"||input==="brokenbridge"){
-        if(!useAction()) brokenBridge();
+        if(!useAction()){ brokenBridge();}
     }
 
     else if(input==="swamp trail"||input==="swamptrail"){
-        if(!useAction()) swampTrail();
+        if(!useAction()){swampTrail();}
     }
 
     else{
         stayHere();
-        pauseThen(restrooms);
+        waitThenCall(restrooms);
     }
 }
 
@@ -318,23 +311,23 @@ function swampInput(input){
     }
 
     else if(input==="memorial plaza"||input==="memorialplaza"){
-        if(!useAction()) memorialPlaza();
+        if(!useAction()){memorialPlaza();}
     }
 
     else if(input==="upland trail"||input==="uplandtrail"){
-        if(!useAction()) uplandTrail();
+        if(!useAction()){uplandTrail();}
     }
 
     else if(input==="restrooms"){
 
-        if(useAction()) return;
+        if(useAction()){ return;}
 
         askLittleIsland();
     }
 
     else{
         stayHere();
-        pauseThen(swampTrail);
+        waitThenCall(swampTrail);
     }
 }
 
@@ -383,11 +376,11 @@ function woodsInput(input){
     input=input.toLowerCase();
 
     if(input==="memorial plaza"||input==="memorialplaza"){
-        if(!useAction()) memorialPlaza();
+        if(!useAction()){memorialPlaza();}
     }
 
     else if(input==="upland trail"||input==="uplandtrail"){
-        if(!useAction()) uplandTrail();
+        if(!useAction()){uplandTrail();}
     }
 
     else if(input==="chop tree"||input==="choptree"){
@@ -396,7 +389,7 @@ function woodsInput(input){
 
     else{
         stayHere();
-        pauseThen(woodsTrail);
+        waitThenCall(woodsTrail);
     }
 }
 
@@ -422,11 +415,11 @@ function uplandInput(input){
     input=input.toLowerCase();
 
     if(input==="woods trail"||input==="woodstrail"){
-        if(!useAction()) woodsTrail();
+        if(!useAction()){woodsTrail();}
     }
 
     else if(input==="swamp trail"||input==="swamptrail"){
-        if(!useAction()) swampTrail();
+        if(!useAction()){swampTrail();}
     }
 
     else if(input==="chop tree"||input==="choptree"){
@@ -435,7 +428,7 @@ function uplandInput(input){
 
     else{
         stayHere();
-        pauseThen(uplandTrail);
+        waitThenCall(uplandTrail);
     }
 }
 
@@ -472,16 +465,16 @@ function islandInput(input){
     else if(input==="take axe"||input==="takeaxe"){
         hasAxe=true;
         print("\nYou picked up the axe!");
-        pauseThen(littleIsland);
+        waitThenCall(littleIsland);
     }
 
     else if(input==="swamp trail"||input==="swamptrail"){
-        if(!useAction()) swampTrail();
+        if(!useAction()){swampTrail();}
     }
 
     else{
         stayHere();
-        pauseThen(littleIsland);
+        waitThenCall(littleIsland);
     }
 }
 
