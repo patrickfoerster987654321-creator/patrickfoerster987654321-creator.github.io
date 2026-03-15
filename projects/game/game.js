@@ -36,7 +36,7 @@ function sleep() {
 }
 
 function gameOver() {
-	clear();
+	clear(); 
 	print("You failed to escape in 30 days. Starving, you fall over and don't wake up");
 	gameActive = false;
 }
@@ -46,16 +46,58 @@ function collectWater() {
 	print("\nYou collected water. Total water: " + water);
 	useAction();
 }
+function chopTree(locationName) {
+    if (!hasAxe) {
+        print("\nYou need an axe to chop trees.");
+        return;
+    }
+
+    let treesLeft = 0;
+
+    if (locationName === "broken") treesLeft = treesBrokenBridge;
+    if (locationName === "restrooms") treesLeft = treesRestrooms;
+    if (locationName === "swamp") treesLeft = treesSwampTrail;
+    if (locationName === "woods") treesLeft = treesWoodsTrail;
+    if (locationName === "upland") treesLeft = treesUplandTrail;
+    if (locationName === "island") treesLeft = treesLittleIsland;
+
+    if (treesLeft <= 0) {
+        print("\nNo trees left here.");
+        return;
+    }
+
+    // remove one tree
+    if (locationName === "broken") treesBrokenBridge--;
+    if (locationName === "restrooms") treesRestrooms--;
+    if (locationName === "swamp") treesSwampTrail--;
+    if (locationName === "woods") treesWoodsTrail--;
+    if (locationName === "upland") treesUplandTrail--;
+    if (locationName === "island") treesLittleIsland--;
+
+    wood += 4;
+
+    print("\nYou chopped a tree and got 4 planks. Total wood: " + wood);
+    useAction();
+}
 
 //Make one function for each location
 function brokenBridge() {
     clear();
     print("\nYou are at the broken bridge!");
     print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tRestrooms" + "\n\tMemorial Plaza");
+        "\n\tCollect Water" + "\n\tRestrooms" + "\n\tMemorial Plaza" + "\n\tCollect Water");
     
     function processInput(input){
-        if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
+ 	if (input.toLowerCase() === "rebuildbridge" || input.toLowerCase() === "rebuild bridge") {
+    if (wood >= 100) {
+        winGame();
+    } else {
+        print("\nYou need 100 planks to rebuild the bridge. You have " + wood + ".");
+        waitThenCall(brokenBridge);
+    }
+	} else if (input.toLowerCase() === "collectwater" || iput.toLowerCase() === "collect water"){
+		collectWater();
+	} else if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
             memorialPlaza();
 	    useAction();
         } else if (input.toLowerCase() === "restrooms") {
@@ -99,9 +141,11 @@ function restrooms() {
 	clear();
 	print("\nYou are at the Restrooms!");
 	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tBroken Bridge" + "\n\tSwamp Trail");
+	"\n\tCollectWater"+ "\n\tBroken Bridge" + "\n\tSwamp Trail");
  	function processInput(input){
- 		if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
+ 		if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water"){
+			collectWater();
+		} else if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
 			brokenBridge();
 			useAction();
 		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail"){
@@ -119,10 +163,12 @@ function swampTrail() {
 	clear();
 	print("\nYou are at the broken bridge!");
 	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tMemorial Plaza" + "\n\tUpland Trail" + "\n\tRestrooms");
+	"\n\tCollect Water" + "\n\tMemorial Plaza" + "\n\tUpland Trail" + "\n\tRestrooms");
 
  	function processInput(input){
- 		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
+ 		if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water"){
+			collectWater();
+		} else if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
 			memorialPlaza();
 			useAction();
 		} else if (input.toLowerCase() === "restrooms") {
