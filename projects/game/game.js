@@ -80,6 +80,12 @@ function chopTree(locationName) {
     useAction();
 }
 
+function winGame() {
+    clear();
+    print("You rebuilt the bridge and escaped! You win!");
+    gameActive = false;
+}
+
 //Make one function for each location
 function brokenBridge() {
     clear();
