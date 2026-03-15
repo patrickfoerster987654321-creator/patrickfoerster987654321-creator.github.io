@@ -483,7 +483,6 @@ function islandInput(input){
 // ======================
 
 function start(){
-
     print("Welcome to my game! Press Enter to start.");
 
     waitForInput(function(){
