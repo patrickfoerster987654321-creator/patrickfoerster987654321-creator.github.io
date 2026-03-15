@@ -1,51 +1,52 @@
-let gameActive = true; //this variable is required. 
-                       //to stop the game, set it to false.
+let gameActive = true;
 
-//Declare your other global variables here
+// Global variables
 let actions = 0;
 let day = 1;
 let water = 0;
 let hasAxe = false;
 let wood = 0;
+
 let treesBrokenBridge = 5;
 let treesRestrooms = 5;
 let treesSwampTrail = 5;
 let treesWoodsTrail = 5;
 let treesUplandTrail = 5;
-let treesMemorialPlaza = 5;
 let treesLittleIsland = 5;
 
-//If you need, add any "helper" functions here
+// Helper functions
 function useAction() {
-	actions++;
-	if (actions >= 5) {
-		sleep();
-	}
+    actions++;
+    if (actions >= 5) {
+        sleep();
+    }
 }
 
 function sleep() {
-	clear();
-	print("You feel tired and fall asleep...");
-	actions = 0;
-	day ++;
-	if (day > 30){
-		gameOver();
-		return;
-	}
-	print("\nDay " + day + " begins.");
+    clear();
+    print("You feel tired and fall asleep...");
+    actions = 0;
+    day++;
+
+    if (day > 30) {
+        gameOver();
+        return;
+    }
+
+    print("\nDay " + day + " begins.");
 }
 
 function gameOver() {
-	clear(); 
-	print("You failed to escape in 30 days. Starving, you fall over and don't wake up");
-	gameActive = false;
+    clear();
+    print("You failed to escape in 30 days. Starving, you fall over and don't wake up.");
+    gameActive = false;
 }
 
 function collectWater() {
-	water++;
-	print("\nYou collected water. Total water: " + water);
-	useAction();
+    water++;
+    print("\nYou collected water. Total water: " + water);
 }
+
 function chopTree(locationName) {
     if (!hasAxe) {
         print("\nYou need an axe to chop trees.");
@@ -66,7 +67,6 @@ function chopTree(locationName) {
         return;
     }
 
-    // remove one tree
     if (locationName === "broken") treesBrokenBridge--;
     if (locationName === "restrooms") treesRestrooms--;
     if (locationName === "swamp") treesSwampTrail--;
@@ -75,9 +75,7 @@ function chopTree(locationName) {
     if (locationName === "island") treesLittleIsland--;
 
     wood += 4;
-
     print("\nYou chopped a tree and got 4 planks. Total wood: " + wood);
-    useAction();
 }
 
 function winGame() {
@@ -92,7 +90,9 @@ function askLittleIsland() {
     print("Do you want to go to Little Island? (yes/no)");
 
     function processInput(input) {
-        if (input.toLowerCase() === "yes") {
+        input = input.toLowerCase();
+
+        if (input === "yes") {
             littleIsland();
         } else {
             restrooms();
@@ -102,155 +102,229 @@ function askLittleIsland() {
     waitForInput(processInput);
 }
 
-//Make one function for each location
+// LOCATIONS
 function brokenBridge() {
     clear();
-    print("\nYou are at the broken bridge!");
-    print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tCollect Water" + "\n\tRestrooms" + "\n\tMemorial Plaza" + "\n\tCollect Water");
-    
-    function processInput(input){
- 	if (input.toLowerCase() === "rebuildbridge" || input.toLowerCase() === "rebuild bridge") {
-    if (wood >= 100) {
-        winGame();
-    } else {
-        print("\nYou need 100 planks to rebuild the bridge. You have " + wood + ".");
-        waitThenCall(brokenBridge);
-    }
-	} else if (input.toLowerCase() === "collectwater" || iput.toLowerCase() === "collect water"){
-		collectWater();
-	} else if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
+    print("\nYou are at the Broken Bridge!");
+    print("\nWhere do you want to go next?" +
+        "\n\tCollect Water" +
+        "\n\tRestrooms" +
+        "\n\tMemorial Plaza" +
+        "\n\tRebuild Bridge");
+
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "rebuildbridge" || input === "rebuild bridge") {
+            if (wood >= 100) {
+                winGame();
+            } else {
+                print("\nYou need 100 planks to rebuild the bridge. You have " + wood + ".");
+                waitThenCall(brokenBridge);
+            }
+        }
+
+        else if (input === "collectwater" || input === "collect water") {
+            collectWater();
+            useAction();
+            waitThenCall(brokenBridge);
+        }
+
+        else if (input === "restrooms") {
+            useAction();
+            restrooms();
+        }
+
+        else if (input === "memorialplaza" || input === "memorial plaza") {
+            useAction();
             memorialPlaza();
-	    useAction();
-        } else if (input.toLowerCase() === "restrooms") {
-		restrooms();
-		useAction();
-	} else {
+        }
+
+        else {
             stayHere();
-	    useAction();
+            useAction();
             waitThenCall(brokenBridge);
         }
     }
+
     waitForInput(processInput);
 }
 
 function memorialPlaza() {
     clear();
-    print("\nYou are in the Memorial Plaza");
-    print("\nWhere do you want to go next? Say one of these choices:" +
-        "\n\tBroken Bridge" + "\n\tWoods Trail" + "\n\tSwamp Trail");
-    
-    function processInput(input){
-        if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
+    print("\nYou are in the Memorial Plaza.");
+    print("\nWhere do you want to go next?" +
+        "\n\tBroken Bridge" +
+        "\n\tWoods Trail" +
+        "\n\tSwamp Trail");
+
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "brokenbridge" || input === "broken bridge") {
+            useAction();
             brokenBridge();
-	    useAction();
-        } else if (input.toLowerCase === "woodstrail" || input.toLowerCase() === "woods trail"){
-		woodsTrail();
-		useAction();
-	} else if (input.toLowerCase === "swamptrail" || input.toLowerCase() === "swamp trail"){
-		swampTrail();
-		useAction();
-	} else {
+        }
+
+        else if (input === "woodstrail" || input === "woods trail") {
+            useAction();
+            woodsTrail();
+        }
+
+        else if (input === "swamptrail" || input === "swamp trail") {
+            useAction();
+            swampTrail();
+        }
+
+        else {
             stayHere();
-	    useAction();
+            useAction();
             waitThenCall(memorialPlaza);
         }
     }
+
     waitForInput(processInput);
 }
 
 function restrooms() {
-	clear();
-	print("\nYou are at the Restrooms!");
-	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tCollectWater"+ "\n\tBroken Bridge" + "\n\tSwamp Trail");
- 	function processInput(input){
- 		if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water"){
-			collectWater();
-		} else if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
-			brokenBridge();
-			useAction();
-		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail"){
-			swampTrail();
-			useAction();
-		}else {
-			stayHere();
-			useAction();
-			waitThenCall(restrooms);
-		}
-	}
-	waitForInput(processInput);
+    clear();
+    print("\nYou are at the Restrooms!");
+    print("\nWhere do you want to go next?" +
+        "\n\tCollect Water" +
+        "\n\tBroken Bridge" +
+        "\n\tSwamp Trail");
+
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "collectwater" || input === "collect water") {
+            collectWater();
+            useAction();
+            waitThenCall(restrooms);
+        }
+
+        else if (input === "brokenbridge" || input === "broken bridge") {
+            useAction();
+            brokenBridge();
+        }
+
+        else if (input === "swamptrail" || input === "swamp trail") {
+            useAction();
+            swampTrail();
+        }
+
+        else {
+            stayHere();
+            useAction();
+            waitThenCall(restrooms);
+        }
+    }
+
+    waitForInput(processInput);
 }
+
 function swampTrail() {
-	clear();
-	print("\nYou are at the broken bridge!");
-	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tCollect Water" + "\n\tMemorial Plaza" + "\n\tUpland Trail" + "\n\tRestrooms");
+    clear();
+    print("\nYou are at the Swamp Trail!");
+    print("\nWhere do you want to go next?" +
+        "\n\tCollect Water" +
+        "\n\tMemorial Plaza" +
+        "\n\tUpland Trail" +
+        "\n\tRestrooms");
 
- 	function processInput(input){
- 		if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water"){
-			collectWater();
-		} else if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
-			memorialPlaza();
-			useAction();
-		} else if (input.toLowerCase() === "restrooms") {
-			askLittleIsland();
-			restrooms();
-			useAction();
-		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail"){
-			uplandTrail();
-			useAction();
-		}
-			else {      
-			stayHere();
-			useAction();
-			waitThenCall(swampTrail);
-		}
-	}
-	waitForInput(processInput);
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "collectwater" || input === "collect water") {
+            collectWater();
+            useAction();
+            waitThenCall(swampTrail);
+        }
+
+        else if (input === "memorialplaza" || input === "memorial plaza") {
+            useAction();
+            memorialPlaza();
+        }
+
+        else if (input === "restrooms") {
+            askLittleIsland();
+        }
+
+        else if (input === "uplandtrail" || input === "upland trail") {
+            useAction();
+            uplandTrail();
+        }
+
+        else {
+            stayHere();
+            useAction();
+            waitThenCall(swampTrail);
+        }
+    }
+
+    waitForInput(processInput);
 }
+
 function woodsTrail() {
-	clear();
-	print("\nYou are at the broken bridge!");
-	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tMemorial Plaza" + "\n\tUpland Trail");
+    clear();
+    print("\nYou are at the Woods Trail!");
+    print("\nWhere do you want to go next?" +
+        "\n\tMemorial Plaza" +
+        "\n\tUpland Trail");
 
- 	function processInput(input){
- 		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
-			memorialPlaza();
-			useAction();
-		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail") {
-			uplandTrail();
-			useAction();
-		} else {
-			stayHere();
-			useAction();
-			waitThenCall(woodsTrail);
-		}
-	}
-	waitForInput(processInput);
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "memorialplaza" || input === "memorial plaza") {
+            useAction();
+            memorialPlaza();
+        }
+
+        else if (input === "uplandtrail" || input === "upland trail") {
+            useAction();
+            uplandTrail();
+        }
+
+        else {
+            stayHere();
+            useAction();
+            waitThenCall(woodsTrail);
+        }
+    }
+
+    waitForInput(processInput);
 }
+
 function uplandTrail() {
-	clear();
-	print("\nYou are at the broken bridge!");
-	print("\nWhere do you want to go next? Say one of these choices:" +
-	"\n\tWoods Trail" + "\n\tSwamp Trail");
+    clear();
+    print("\nYou are at the Upland Trail!");
+    print("\nWhere do you want to go next?" +
+        "\n\tWoods Trail" +
+        "\n\tSwamp Trail");
 
- 	function processInput(input){
- 		if (input.toLowerCase() === "woodstrail" || input.toLowerCase() === "woods trail") {
-			woodsTrail();
-			useAction();
-		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail") {
-			swampTrail();
-			useAction();
-		} else {
-			stayHere();
-			useAction();
-			waitThenCall(uplandTrail);
-		}
-	}
-	waitForInput(processInput);
+    function processInput(input) {
+        input = input.toLowerCase();
+
+        if (input === "woodstrail" || input === "woods trail") {
+            useAction();
+            woodsTrail();
+        }
+
+        else if (input === "swamptrail" || input === "swamp trail") {
+            useAction();
+            swampTrail();
+        }
+
+        else {
+            stayHere();
+            useAction();
+            waitThenCall(uplandTrail);
+        }
+    }
+
+    waitForInput(processInput);
 }
+
 function littleIsland() {
     clear();
     print("\nYou arrive at Little Island!");
@@ -261,24 +335,35 @@ function littleIsland() {
         "\n\tSwamp Trail");
 
     function processInput(input) {
-        if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water") {
+        input = input.toLowerCase();
+
+        if (input === "collectwater" || input === "collect water") {
             collectWater();
+            useAction();
             waitThenCall(littleIsland);
         }
-        else if (input.toLowerCase() === "choptree" || input.toLowerCase() === "chop tree") {
+
+        else if (input === "choptree" || input === "chop tree") {
             chopTree("island");
+            useAction();
             waitThenCall(littleIsland);
         }
-        else if (input.toLowerCase() === "takeaxe" || input.toLowerCase() === "take axe") {
+
+        else if (input === "takeaxe" || input === "take axe") {
             hasAxe = true;
             print("\nYou picked up the axe!");
+            useAction();
             waitThenCall(littleIsland);
         }
-        else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail") {
+
+        else if (input === "swamptrail" || input === "swamp trail") {
+            useAction();
             swampTrail();
         }
+
         else {
             stayHere();
+            useAction();
             waitThenCall(littleIsland);
         }
     }
@@ -286,14 +371,61 @@ function littleIsland() {
     waitForInput(processInput);
 }
 
-//finally, make sure you customize this to tell it what should happen at the
-//very start. For this simple example, any input will bring you
-//to locationA
-function start(){
-    print("Welcome to my game! Press any key to start");
+// Start
+function start() {
+    print("Welcome to my game! Press any key to start.");
 
-    function processInput(input){
-            brokenBridge();
+    function processInput(input) {
+        brokenBridge();
     }
+
     waitForInput(processInput);
 }
+
+// Helpers
+function print(text) {
+    const output = document.getElementById('output');
+    const line = document.createElement('div');
+    line.innerHTML = "<p>" + text + "</p>";
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+}
+
+function printAscii(art) {
+    const output = document.getElementById('output');
+    const pre = document.createElement('pre');
+    pre.className = 'ascii-art';
+    pre.textContent = art;
+    output.appendChild(pre);
+    output.scrollTop = output.scrollHeight;
+}
+
+function clear() {
+    document.getElementById('output').innerHTML = '';
+}
+
+document.getElementById('user-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && gameActive) {
+        const input = this.value.trim();
+        this.value = '';
+        print('> ' + input);
+        handleInput(input);
+    }
+});
+
+function handleInput(input) {
+    console.log("No handler for input: " + input);
+}
+
+function waitForInput(handlerFunction) {
+    handleInput = handlerFunction;
+}
+
+function waitThenCall(target) {
+    setTimeout(target, 2000);
+}
+
+function stayHere() {
+    print("\nSorry, I don't understand your input. I'll assume you want to stay here.");
+}
+
