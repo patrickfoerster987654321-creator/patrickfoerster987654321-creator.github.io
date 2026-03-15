@@ -14,6 +14,11 @@ let treesWoodsTrail = 5;
 let treesUplandTrail = 5;
 let treesLittleIsland = 5;
 
+// Delay helper so prints appear before screen changes
+function pauseThen(next) {
+    setTimeout(next, 2000);
+}
+
 // Status display
 function showStatus() {
     print("Day " + day + " | Water: " + water + " | Wood: " + wood);
@@ -43,7 +48,7 @@ function sleep() {
 
 function gameOver() {
     clear();
-    print("You failed to escape in 30 days. Starving, you fall over and don't wake up.");
+    print("You failed to escape. You fall over and don't wake up.");
     gameActive = false;
 }
 
@@ -89,23 +94,18 @@ function winGame() {
     gameActive = false;
 }
 
+// LITTLE ISLAND PROMPT
 function askLittleIsland() {
     clear();
     showStatus();
     print("On your way to the Restrooms, you see a small path leading to a secret place.");
     print("Do you want to go to Little Island? (yes/no)");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
-
-        if (input === "yes") {
-            littleIsland();
-        } else {
-            restrooms();
-        }
-    }
-
-    waitForInput(processInput);
+        if (input === "yes") {littleIsland();}
+        else {restrooms();}
+    });
 }
 
 // LOCATIONS
@@ -119,21 +119,20 @@ function brokenBridge() {
         "\n\tMemorial Plaza" +
         "\n\tRebuild Bridge");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "rebuildbridge" || input === "rebuild bridge") {
-            if (wood >= 100) {
-                winGame();
-            } else {
+            if (wood >= 100){ winGame();}
+            else {
                 print("\nYou need 100 planks to rebuild the bridge. You have " + wood + ".");
-                brokenBridge();
+                pauseThen(brokenBridge);
             }
         }
 
         else if (input === "collectwater" || input === "collect water") {
             collectWater();
-            brokenBridge();
+            pauseThen(brokenBridge);
         }
 
         else if (input === "restrooms") {
@@ -149,11 +148,9 @@ function brokenBridge() {
         else {
             stayHere();
             useAction();
-            waitThenCall(brokenBridge);
+            pauseThen(brokenBridge);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 function memorialPlaza() {
@@ -165,7 +162,7 @@ function memorialPlaza() {
         "\n\tWoods Trail" +
         "\n\tSwamp Trail");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "brokenbridge" || input === "broken bridge") {
@@ -186,11 +183,9 @@ function memorialPlaza() {
         else {
             stayHere();
             useAction();
-            waitThenCall(memorialPlaza);
+            pauseThen(memorialPlaza);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 function restrooms() {
@@ -202,12 +197,12 @@ function restrooms() {
         "\n\tBroken Bridge" +
         "\n\tSwamp Trail");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            waitThenCall(restrooms);
+            pauseThen(restrooms);
         }
 
         else if (input === "brokenbridge" || input === "broken bridge") {
@@ -223,11 +218,9 @@ function restrooms() {
         else {
             stayHere();
             useAction();
-            waitThenCall(restrooms);
+            pauseThen(restrooms);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 function swampTrail() {
@@ -240,12 +233,12 @@ function swampTrail() {
         "\n\tUpland Trail" +
         "\n\tRestrooms");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            waitThenCall(swampTrail);
+            pauseThen(swampTrail);
         }
 
         else if (input === "memorialplaza" || input === "memorial plaza") {
@@ -265,11 +258,9 @@ function swampTrail() {
         else {
             stayHere();
             useAction();
-            waitThenCall(swampTrail);
+            pauseThen(swampTrail);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 function woodsTrail() {
@@ -280,7 +271,7 @@ function woodsTrail() {
         "\n\tMemorial Plaza" +
         "\n\tUpland Trail");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "memorialplaza" || input === "memorial plaza") {
@@ -296,11 +287,9 @@ function woodsTrail() {
         else {
             stayHere();
             useAction();
-            waitThenCall(woodsTrail);
-	}
-    }
-
-    waitForInput(processInput);
+            pauseThen(woodsTrail);
+        }
+    });
 }
 
 function uplandTrail() {
@@ -311,7 +300,7 @@ function uplandTrail() {
         "\n\tWoods Trail" +
         "\n\tSwamp Trail");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "woodstrail" || input === "woods trail") {
@@ -327,11 +316,9 @@ function uplandTrail() {
         else {
             stayHere();
             useAction();
-            waitThenCall(uplandTrail);
+            pauseThen(uplandTrail);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 function littleIsland() {
@@ -344,23 +331,23 @@ function littleIsland() {
         "\n\tTake Axe" +
         "\n\tSwamp Trail");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         input = input.toLowerCase();
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            waitThenCall(littleIsland);
+            pauseThen(littleIsland);
         }
 
         else if (input === "choptree" || input === "chop tree") {
             chopTree("island");
-            waitThenCall(littleIsland);
+            pauseThen(littleIsland);
         }
 
         else if (input === "takeaxe" || input === "take axe") {
             hasAxe = true;
             print("\nYou picked up the axe!");
-            waitThenCall(littleIsland);
+            pauseThen(littleIsland);
         }
 
         else if (input === "swamptrail" || input === "swamp trail") {
@@ -371,22 +358,18 @@ function littleIsland() {
         else {
             stayHere();
             useAction();
-            waitThenCall(littleIsland);
+            pauseThen(littleIsland);
         }
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 // Start
 function start() {
     print("Welcome to my game! Press any key to start.");
 
-    function processInput(input) {
+    waitForInput(function(input) {
         brokenBridge();
-    }
-
-    waitForInput(processInput);
+    });
 }
 
 // Helpers
@@ -395,15 +378,6 @@ function print(text) {
     const line = document.createElement('div');
     line.innerHTML = "<p>" + text + "</p>";
     output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-}
-
-function printAscii(art) {
-    const output = document.getElementById('output');
-    const pre = document.createElement('pre');
-    pre.className = 'ascii-art';
-    pre.textContent = art;
-    output.appendChild(pre);
     output.scrollTop = output.scrollHeight;
 }
 
@@ -426,10 +400,6 @@ function handleInput(input) {
 
 function waitForInput(handlerFunction) {
     handleInput = handlerFunction;
-}
-
-function waitThenCall(target){
-    setTimeout(target,2000);
 }
 
 function stayHere() {
