@@ -2,7 +2,18 @@ let gameActive = true; //this variable is required.
                        //to stop the game, set it to false.
 
 //Declare your other global variables here
-
+let actions = 0;
+let day = 1;
+let water = 0;
+let hasAxe = false;
+let wood = 0;
+let treesBrokenBridge = 5;
+let treesRestrooms = 5;
+let treesSwampTrail = 5;
+let treesWoodsTrail = 5;
+let treesUplandTrail = 5;
+let treesMemorialPlaza = 5;
+let treesLittleIsland = 5;
 
 //If you need, add any "helper" functions here
 
@@ -15,7 +26,7 @@ function brokenBridge() {
         "\n\tRestrooms" + "\n\tMemorial Plaza");
     
     function processInput(input){
-        if (input.toLowerCase() === "memorialplaza" || "memorial plaza") {
+        if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
             memorialPlaza();
         } else if (input.toLowerCase() === "restrooms") {
 		restrooms();
@@ -34,11 +45,11 @@ function memorialPlaza() {
         "\n\tBroken Bridge" + "\n\tWoods Trail" + "\n\tSwamp Trail");
     
     function processInput(input){
-        if (input.toLowerCase() === "brokenbridge" || "broken bridge") {
+        if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
             brokenBridge();
-        } else if (input.toLowerCase === "woodstrail" || "woods trail"){
+        } else if (input.toLowerCase === "woodstrail" || input.toLowerCase() === "woods trail"){
 		woodsTrail();
-	} else if (input.toLowerCase === "swamptrail" || "swamp trail"){
+	} else if (input.toLowerCase === "swamptrail" || input.toLowerCase() === "swamp trail"){
 		swampTrail();
 	} else {
             stayHere();
@@ -54,9 +65,9 @@ function restrooms() {
 	print("\nWhere do you want to go next? Say one of these choices:" +
 	"\n\tBroken Bridge" + "\n\tSwamp Trail");
  	function processInput(input){
- 		if (input.toLowerCase() === "brokenbridge" || "broken bridge") {
+ 		if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
 			brokenBridge();
-		} else if (input.toLowerCase() === "swamptrail" || "swamp trail"){
+		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail"){
 			swampTrail();
 		}else {
 			stayHere();
@@ -72,11 +83,11 @@ function swampTrail() {
 	"\n\tMemorial Plaza" + "\n\tUpland Trail" + "\n\tRestrooms");
 
  	function processInput(input){
- 		if (input.toLowerCase() === "memorialplaza" || "memorial plaza") {
+ 		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
 			memorialPlaza();
 		} else if (input.toLowerCase() === "restrooms") {
 			restrooms();
-		} else if (input.toLowerCase() === "uplandtrail" || "upland trail"){
+		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail"){
 			uplandTrail();
 		}
 			else {      
@@ -93,9 +104,9 @@ function woodsTrail() {
 	"\n\tMemorial Plaza" + "\n\tUpland Trail");
 
  	function processInput(input){
- 		if (input.toLowerCase() === "memorialplaza" || "memorial plaza") {
+ 		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
 			memorialPlaza();
-		} else if (input.toLowerCase() === "uplandtrail" || "upland trail") {
+		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail") {
 			uplandTrail();
 		} else {
 			stayHere();
@@ -111,9 +122,9 @@ function uplandTrail() {
 	"\n\tWoods Trail" + "\n\tSwamp Trail");
 
  	function processInput(input){
- 		if (input.toLowerCase() === "woodstrail" || "woods trail") {
+ 		if (input.toLowerCase() === "woodstrail" || input.toLowerCase() === "woods trail") {
 			woodsTrail();
-		} else if (input.toLowerCase() === "swamptrail" || "swamp trail") {
+		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail") {
 			swampTrail();
 		} else {
 			stayHere();
