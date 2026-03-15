@@ -251,6 +251,41 @@ function uplandTrail() {
 	}
 	waitForInput(processInput);
 }
+function littleIsland() {
+    clear();
+    print("\nYou arrive at Little Island!");
+    print("\nYou can:" +
+        "\n\tCollect Water" +
+        "\n\tChop Tree" +
+        "\n\tTake Axe" +
+        "\n\tSwamp Trail");
+
+    function processInput(input) {
+        if (input.toLowerCase() === "collectwater" || input.toLowerCase() === "collect water") {
+            collectWater();
+            waitThenCall(littleIsland);
+        }
+        else if (input.toLowerCase() === "choptree" || input.toLowerCase() === "chop tree") {
+            chopTree("island");
+            waitThenCall(littleIsland);
+        }
+        else if (input.toLowerCase() === "takeaxe" || input.toLowerCase() === "take axe") {
+            hasAxe = true;
+            print("\nYou picked up the axe!");
+            waitThenCall(littleIsland);
+        }
+        else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail") {
+            swampTrail();
+        }
+        else {
+            stayHere();
+            waitThenCall(littleIsland);
+        }
+    }
+
+    waitForInput(processInput);
+}
+
 //finally, make sure you customize this to tell it what should happen at the
 //very start. For this simple example, any input will bring you
 //to locationA
