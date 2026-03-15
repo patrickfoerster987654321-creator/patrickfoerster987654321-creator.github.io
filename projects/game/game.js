@@ -86,6 +86,22 @@ function winGame() {
     gameActive = false;
 }
 
+function askLittleIsland() {
+    clear();
+    print("On your way to the Restrooms, you see a small path leading to a secret place.");
+    print("Do you want to go to Little Island? (yes/no)");
+
+    function processInput(input) {
+        if (input.toLowerCase() === "yes") {
+            littleIsland();
+        } else {
+            restrooms();
+        }
+    }
+
+    waitForInput(processInput);
+}
+
 //Make one function for each location
 function brokenBridge() {
     clear();
@@ -178,6 +194,7 @@ function swampTrail() {
 			memorialPlaza();
 			useAction();
 		} else if (input.toLowerCase() === "restrooms") {
+			askLittleIsland();
 			restrooms();
 			useAction();
 		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail"){
