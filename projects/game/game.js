@@ -14,6 +14,11 @@ let treesWoodsTrail = 5;
 let treesUplandTrail = 5;
 let treesLittleIsland = 5;
 
+// Status display
+function showStatus() {
+    print("Day " + day + " | Water: " + water + " | Wood: " + wood);
+}
+
 // Helper functions
 function useAction() {
     actions++;
@@ -86,6 +91,7 @@ function winGame() {
 
 function askLittleIsland() {
     clear();
+    showStatus();
     print("On your way to the Restrooms, you see a small path leading to a secret place.");
     print("Do you want to go to Little Island? (yes/no)");
 
@@ -105,6 +111,7 @@ function askLittleIsland() {
 // LOCATIONS
 function brokenBridge() {
     clear();
+    showStatus();
     print("\nYou are at the Broken Bridge!");
     print("\nWhere do you want to go next?" +
         "\n\tCollect Water" +
@@ -120,14 +127,13 @@ function brokenBridge() {
                 winGame();
             } else {
                 print("\nYou need 100 planks to rebuild the bridge. You have " + wood + ".");
-                waitThenCall(brokenBridge);
+                brokenBridge();
             }
         }
 
         else if (input === "collectwater" || input === "collect water") {
             collectWater();
-            useAction();
-            waitThenCall(brokenBridge);
+            brokenBridge();
         }
 
         else if (input === "restrooms") {
@@ -152,6 +158,7 @@ function brokenBridge() {
 
 function memorialPlaza() {
     clear();
+    showStatus();
     print("\nYou are in the Memorial Plaza.");
     print("\nWhere do you want to go next?" +
         "\n\tBroken Bridge" +
@@ -188,6 +195,7 @@ function memorialPlaza() {
 
 function restrooms() {
     clear();
+    showStatus();
     print("\nYou are at the Restrooms!");
     print("\nWhere do you want to go next?" +
         "\n\tCollect Water" +
@@ -199,7 +207,6 @@ function restrooms() {
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            useAction();
             waitThenCall(restrooms);
         }
 
@@ -225,6 +232,7 @@ function restrooms() {
 
 function swampTrail() {
     clear();
+    showStatus();
     print("\nYou are at the Swamp Trail!");
     print("\nWhere do you want to go next?" +
         "\n\tCollect Water" +
@@ -237,7 +245,6 @@ function swampTrail() {
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            useAction();
             waitThenCall(swampTrail);
         }
 
@@ -267,6 +274,7 @@ function swampTrail() {
 
 function woodsTrail() {
     clear();
+    showStatus();
     print("\nYou are at the Woods Trail!");
     print("\nWhere do you want to go next?" +
         "\n\tMemorial Plaza" +
@@ -289,7 +297,7 @@ function woodsTrail() {
             stayHere();
             useAction();
             waitThenCall(woodsTrail);
-        }
+	}
     }
 
     waitForInput(processInput);
@@ -297,6 +305,7 @@ function woodsTrail() {
 
 function uplandTrail() {
     clear();
+    showStatus();
     print("\nYou are at the Upland Trail!");
     print("\nWhere do you want to go next?" +
         "\n\tWoods Trail" +
@@ -327,6 +336,7 @@ function uplandTrail() {
 
 function littleIsland() {
     clear();
+    showStatus();
     print("\nYou arrive at Little Island!");
     print("\nYou can:" +
         "\n\tCollect Water" +
@@ -339,20 +349,17 @@ function littleIsland() {
 
         if (input === "collectwater" || input === "collect water") {
             collectWater();
-            useAction();
             waitThenCall(littleIsland);
         }
 
         else if (input === "choptree" || input === "chop tree") {
             chopTree("island");
-            useAction();
             waitThenCall(littleIsland);
         }
 
         else if (input === "takeaxe" || input === "take axe") {
             hasAxe = true;
             print("\nYou picked up the axe!");
-            useAction();
             waitThenCall(littleIsland);
         }
 
@@ -421,8 +428,8 @@ function waitForInput(handlerFunction) {
     handleInput = handlerFunction;
 }
 
-function waitThenCall(target) {
-    setTimeout(target, 2000);
+function waitThenCall(target){
+    setTimeout(target,2000);
 }
 
 function stayHere() {
