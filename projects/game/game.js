@@ -57,10 +57,13 @@ function brokenBridge() {
     function processInput(input){
         if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
             memorialPlaza();
+	    useAction();
         } else if (input.toLowerCase() === "restrooms") {
 		restrooms();
+		useAction();
 	} else {
             stayHere();
+	    useAction();
             waitThenCall(brokenBridge);
         }
     }
@@ -76,12 +79,16 @@ function memorialPlaza() {
     function processInput(input){
         if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
             brokenBridge();
+	    useAction();
         } else if (input.toLowerCase === "woodstrail" || input.toLowerCase() === "woods trail"){
 		woodsTrail();
+		useAction();
 	} else if (input.toLowerCase === "swamptrail" || input.toLowerCase() === "swamp trail"){
 		swampTrail();
+		useAction();
 	} else {
             stayHere();
+	    useAction();
             waitThenCall(memorialPlaza);
         }
     }
@@ -96,10 +103,13 @@ function restrooms() {
  	function processInput(input){
  		if (input.toLowerCase() === "brokenbridge" || input.toLowerCase() === "broken bridge") {
 			brokenBridge();
+			useAction();
 		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail"){
 			swampTrail();
+			useAction();
 		}else {
 			stayHere();
+			useAction();
 			waitThenCall(restrooms);
 		}
 	}
@@ -114,13 +124,17 @@ function swampTrail() {
  	function processInput(input){
  		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
 			memorialPlaza();
+			useAction();
 		} else if (input.toLowerCase() === "restrooms") {
 			restrooms();
+			useAction();
 		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail"){
 			uplandTrail();
+			useAction();
 		}
 			else {      
 			stayHere();
+			useAction();
 			waitThenCall(swampTrail);
 		}
 	}
@@ -135,10 +149,13 @@ function woodsTrail() {
  	function processInput(input){
  		if (input.toLowerCase() === "memorialplaza" || input.toLowerCase() === "memorial plaza") {
 			memorialPlaza();
+			useAction();
 		} else if (input.toLowerCase() === "uplandtrail" || input.toLowerCase() === "upland trail") {
 			uplandTrail();
+			useAction();
 		} else {
 			stayHere();
+			useAction();
 			waitThenCall(woodsTrail);
 		}
 	}
@@ -153,10 +170,13 @@ function uplandTrail() {
  	function processInput(input){
  		if (input.toLowerCase() === "woodstrail" || input.toLowerCase() === "woods trail") {
 			woodsTrail();
+			useAction();
 		} else if (input.toLowerCase() === "swamptrail" || input.toLowerCase() === "swamp trail") {
 			swampTrail();
+			useAction();
 		} else {
 			stayHere();
+			useAction();
 			waitThenCall(uplandTrail);
 		}
 	}
