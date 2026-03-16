@@ -180,7 +180,7 @@ function brokenBridgeInput(input){
         }
         else{
             print("\nYou need 100 planks. You have "+wood+".");
-            waiThenCall(brokenBridge);
+            waitThenCall(brokenBridge);
         }
 
     }
@@ -320,7 +320,7 @@ function swampInput(input){
 
     else if(input==="restrooms"){
 
-        if(useAction()){ return;}
+        if(!useAction()){ return;}
 
         askLittleIsland();
     }
@@ -339,7 +339,7 @@ function askLittleIsland(){
 
     print("On your way to the Restrooms, you see a small hidden path.");
     print("Do you want to go to Little Island? (yes/no)");
-
+	//callback function, puts an anonymouse function in with the input parameters which will say when the user types something, then use it, instead of just use whatever's here
     waitForInput(function(input){
 
         input=input.toLowerCase();
