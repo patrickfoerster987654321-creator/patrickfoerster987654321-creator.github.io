@@ -92,3 +92,15 @@ footer {
   color: #555;
   border-top: 1px solid #ddd;
 }
+/* This applies styles only when the screen is small */
+@media (max-width: 700px) {
+  .intro {
+    grid-template-columns: 1fr;
+  }
+
+  nav {
+    /* Flex-direction changes row → column */
+    flex-direction: column;
+    gap: 8px;
+  }
+}
