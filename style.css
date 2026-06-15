@@ -24,3 +24,22 @@ a:hover {
   margin: auto;
   padding: 16px;
 }
+header {
+  background: #111827;
+  color: white;
+  padding: 16px 0;
+}
+
+nav {
+  /* Flex puts list items in a row */
+  display: flex;
+  /* This puts first item left, last item right, and everything else in between */
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+}
