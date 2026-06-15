@@ -43,3 +43,12 @@ nav ul {
   gap: 16px;
   list-style: none;
 }
+main {
+  padding: 32px 0;
+}
+
+h2 {
+  margin-bottom: 16px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 4.8px;
+}
