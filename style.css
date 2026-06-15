@@ -12,3 +12,10 @@ body {
   /* This controls spacing between lines of text */
   line-height: 1.5;
 }
+a {
+  color: #2563eb;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
