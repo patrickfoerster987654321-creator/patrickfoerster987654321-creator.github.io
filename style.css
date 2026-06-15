@@ -19,3 +19,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
