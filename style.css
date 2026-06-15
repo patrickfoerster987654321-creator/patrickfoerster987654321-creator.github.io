@@ -52,3 +52,37 @@ h2 {
   border-bottom: 2px solid #ddd;
   padding-bottom: 4.8px;
 }
+.intro {
+  display: grid;
+  /* This splits the layout into two columns */
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.intro-photo img {
+  width: 100%;
+  /* Makes the image perfectly round */
+  border-radius: 50%;
+  border: 3px solid #ddd;
+}
+.projects-list {
+  display: grid;
+  /* Creates flexible columns that shrink nicely */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: white;
+  padding: 16px;
+  /* Rounds the corners of the card */
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.project-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
